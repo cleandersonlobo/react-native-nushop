@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "nubill",
+    "slug": "nubill",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "name": "nubill"
+}
