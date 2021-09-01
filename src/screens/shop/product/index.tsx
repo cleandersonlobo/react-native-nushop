@@ -3,6 +3,8 @@ import { useRouteParams } from 'navigation/hooks/useRouteParams';
 import { StyleSheet, Text, ScrollView, View, Image } from 'react-native';
 import { AppColors } from 'core/colors';
 import TextPrice from 'components/text-price';
+import Separator from 'components/separator';
+import NuButton from 'components/button';
 import { Offer } from '../types';
 
 const ProductScreen = () => {
@@ -21,8 +23,22 @@ const ProductScreen = () => {
         <View style={styles.body}>
           <View>
             <Text style={styles.title}>{offer?.product.name}</Text>
-            <Text style={styles.description}>{offer?.product.description}</Text>
             <TextPrice style={styles.price} price={offer?.price} />
+            <Separator />
+            <Text style={styles.description}>{offer?.product.description}</Text>
+          </View>
+          <View style={styles.viewButton}>
+            <NuButton
+              variant="outline"
+              style={styles.button}
+              text="Adicionar no carrinho"
+            />
+            <Separator horizontal />
+            <NuButton
+              variant="secondary"
+              style={styles.button}
+              text="Comprar agora"
+            />
           </View>
         </View>
       </ScrollView>
@@ -37,6 +53,15 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: AppColors.white,
   },
+  viewButton: {
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    flexDirection: 'row',
+    marginBottom: 16,
+  },
+  button: {
+    width: '50%',
+  },
   image: { width: '100%', height: 250 },
   viewImage: {
     padding: 10,
@@ -46,10 +71,12 @@ const styles = StyleSheet.create({
   },
   body: {
     flex: 1,
+    justifyContent: 'space-between',
     backgroundColor: AppColors.white,
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
-    padding: 20,
+    paddingHorizontal: 20,
+    paddingVertical: 24,
     shadowColor: AppColors.shadowColor,
     shadowOffset: {
       width: 0,
@@ -66,9 +93,10 @@ const styles = StyleSheet.create({
   },
   description: {
     fontSize: 14,
-    lineHeight: 24,
+    lineHeight: 28,
     color: AppColors.darkLight,
     flexWrap: 'nowrap',
+    paddingRight: 16,
   },
   price: {
     fontSize: 24,

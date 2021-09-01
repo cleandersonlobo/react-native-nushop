@@ -1,12 +1,12 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import ShopNavigation from 'screens/shop';
 import { ShopScreenRoutes } from 'screens/shop/routes';
 import { WalletRoutes } from 'screens/wallet/routes';
 import { SimpleLineIcons, MaterialIcons } from '@expo/vector-icons';
 
 import { AppColors } from 'core/colors';
 import { StatusBar } from 'react-native';
+import ShopHomeScreen from 'screens/shop/home';
 import WalletScreen from '../screens/wallet';
 
 const MainTabs = createBottomTabNavigator();
@@ -40,7 +40,7 @@ const MainNavigation = () => {
       />
       <MainTabs.Screen
         name={ShopScreenRoutes.Home}
-        component={ShopNavigation}
+        component={ShopHomeScreen}
         options={{
           headerShown: false,
           tabBarLabel: 'Ofertas',
