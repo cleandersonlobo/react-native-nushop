@@ -2,6 +2,9 @@ import React, { useMemo } from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { AppColors } from 'core/colors';
 import { LocaleService } from 'domain/locale/locale.service';
+import { AntDesign } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/core';
+import { ShopScreenRoutes } from 'screens/shop/routes';
 import { Offer } from '../../../types';
 
 interface Props {
@@ -9,12 +12,34 @@ interface Props {
 }
 
 const ProductCard: React.FC<Props> = ({ item }) => {
+  const navigation = useNavigation();
+
   const price = useMemo(
     () => LocaleService.formatePrice({ price: item.price }),
     [item.price],
   );
+
+  const stars = useMemo(() => {
+    return Array.from({ length: 5 }).map((_, index) => (
+      <AntDesign
+        key={`star_${index.toString()}`}
+        name="star"
+        size={12}
+        color={AppColors.warning}
+        style={styles.icon}
+      />
+    ));
+  }, []);
+
+  const onPress = () => {
+    navigation.navigate(
+      ShopScreenRoutes.Product as never,
+      { offer: item } as never,
+    );
+  };
+
   return (
-    <TouchableOpacity style={styles.card}>
+    <TouchableOpacity style={styles.card} onPress={onPress}>
       <View style={styles.viewImage}>
         <Image
           source={{ uri: item.product.image }}
@@ -24,9 +49,7 @@ const ProductCard: React.FC<Props> = ({ item }) => {
       </View>
       <View style={styles.viewDetails}>
         <Text style={styles.title}>{item.product.name}</Text>
-        <Text style={styles.description} numberOfLines={1}>
-          {item.product.description}
-        </Text>
+        <View style={styles.viewStars}>{stars}</View>
         <Text style={styles.price}>{price}</Text>
       </View>
     </TouchableOpacity>
@@ -36,11 +59,16 @@ const ProductCard: React.FC<Props> = ({ item }) => {
 export default ProductCard;
 
 const styles = StyleSheet.create({
+  viewStars: {
+    flexDirection: 'row',
+  },
+  icon: {
+    marginRight: 3,
+  },
   card: {
     borderRadius: 10,
     margin: 10,
     flexDirection: 'row',
-    padding: 10,
     backgroundColor: AppColors.white,
     shadowColor: AppColors.shadowColor,
     shadowOffset: {
@@ -52,14 +80,15 @@ const styles = StyleSheet.create({
   },
   viewDetails: { justifyContent: 'space-around', flex: 1 },
   image: {
-    width: 70,
-    height: 70,
-    borderRadius: 10,
+    width: 100,
+    height: 100,
+    borderTopLeftRadius: 10,
+    borderBottomLeftRadius: 10,
   },
   viewImage: {
     justifyContent: 'center',
     alignItems: 'center',
-    marginRight: 16,
+    marginRight: 24,
   },
   title: {
     fontSize: 16,
