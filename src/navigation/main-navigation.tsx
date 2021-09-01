@@ -3,7 +3,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import ShopNavigation from 'screens/shop';
 import { ShopScreenRoutes } from 'screens/shop/routes';
 import { WalletRoutes } from 'screens/wallet/routes';
-import { SimpleLineIcons, Feather } from '@expo/vector-icons';
+import { SimpleLineIcons, MaterialIcons } from '@expo/vector-icons';
+
 import { AppColors } from 'core/colors';
 import { StatusBar } from 'react-native';
 import WalletScreen from '../screens/wallet';
@@ -24,7 +25,7 @@ const MainNavigation = () => {
         component={WalletScreen}
         options={{
           headerShown: false,
-          tabBarLabel: 'Wallet',
+          tabBarLabel: 'Carteira',
           tabBarInactiveTintColor: AppColors.gray,
           tabBarActiveTintColor: AppColors.secondary,
           tabBarIcon: ({ color, size }) => (
@@ -42,11 +43,11 @@ const MainNavigation = () => {
         component={ShopNavigation}
         options={{
           headerShown: false,
-          tabBarLabel: 'Shop',
+          tabBarLabel: 'Ofertas',
           tabBarInactiveTintColor: AppColors.gray,
           tabBarActiveTintColor: AppColors.secondary,
           tabBarIcon: ({ color, size }) => (
-            <Feather name="shopping-bag" size={size} color={color} />
+            <MaterialIcons name="local-offer" size={size} color={color} />
           ),
         }}
         listeners={{
