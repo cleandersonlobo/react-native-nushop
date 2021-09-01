@@ -33,6 +33,9 @@
         "endOfLine": "auto"
       }
     ],
+    "react/require-default-props": "off",
+    "react/style-prop-object": "off",
+    "class-methods-use-this": "off",
     "import/prefer-default-export": "off",
     "no-use-before-define": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off",

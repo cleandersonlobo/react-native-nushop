@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "nubill",
-    "slug": "nubill",
+    "name": "nushop",
+    "slug": "nushop",
     "version": "1.0.0",
     "assetBundlePatterns": [
       "**/*"
     ]
   },
-  "name": "nubill"
+  "name": "nushop"
 }

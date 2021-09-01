@@ -1,4 +1,4 @@
-package com.nubill;
+package com.nushop;
 
 import android.os.Bundle;
 

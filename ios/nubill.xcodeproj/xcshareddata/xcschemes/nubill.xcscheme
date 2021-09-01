@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "nubill.app"
-               BlueprintName = "nubill"
-               ReferencedContainer = "container:nubill.xcodeproj">
+               BuildableName = "nushop.app"
+               BlueprintName = "nushop"
+               ReferencedContainer = "container:nushop.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "nubillTests.xctest"
-               BlueprintName = "nubillTests"
-               ReferencedContainer = "container:nubill.xcodeproj">
+               BuildableName = "nushopTests.xctest"
+               BlueprintName = "nushopTests"
+               ReferencedContainer = "container:nushop.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "nubill.app"
-            BlueprintName = "nubill"
-            ReferencedContainer = "container:nubill.xcodeproj">
+            BuildableName = "nushop.app"
+            BlueprintName = "nushop"
+            ReferencedContainer = "container:nushop.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "nubill.app"
-            BlueprintName = "nubill"
-            ReferencedContainer = "container:nubill.xcodeproj">
+            BuildableName = "nushop.app"
+            BlueprintName = "nushop"
+            ReferencedContainer = "container:nushop.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
