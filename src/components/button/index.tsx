@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   TouchableOpacityProps,
   TextProps,
+  View,
 } from 'react-native';
 import { AppColors } from 'core/colors';
 
@@ -12,6 +13,7 @@ interface Props {
   variant?: 'primary' | 'secondary' | 'outline';
   text?: string;
   textStyles?: TextProps['style'];
+  rightComponent?: React.ReactNode | React.ReactNode[];
 }
 
 type ButtonProps = TouchableOpacityProps & Props;
@@ -21,6 +23,7 @@ const NuButton: React.FC<ButtonProps> = ({
   style,
   text,
   textStyles,
+  rightComponent,
 }) => {
   const buttonStyles = useMemo(() => {
     switch (variant) {
@@ -43,6 +46,7 @@ const NuButton: React.FC<ButtonProps> = ({
   }, [variant]);
   return (
     <TouchableOpacity style={[styles.button, buttonStyles.button, style]}>
+      <View style={styles.rightCol}>{rightComponent}</View>
       <Text style={[styles.buttonText, buttonStyles.text, textStyles]}>
         {text}
       </Text>
@@ -75,11 +79,16 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: AppColors.orange,
   },
+  rightCol: {
+    left: 32,
+    position: 'absolute',
+  },
   button: {
+    flexDirection: 'row',
     paddingHorizontal: 8,
     height: 48,
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 16,
+    borderRadius: 10,
   },
 });
