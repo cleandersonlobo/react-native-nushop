@@ -1,5 +1,5 @@
 import React from 'react';
-import { Offer } from 'domain/wallet/types';
+import { Checkout, Offer } from 'domain/wallet/types';
 import { WalletContext } from './wallet.context';
 import {
   initialWalletState,
@@ -11,21 +11,22 @@ import { WalletErros } from './constants';
 export const WalletProdovider: React.FC = ({ children }) => {
   const [props, dispatch] = React.useReducer(walletReducer, initialWalletState);
 
-  const onPressBuy = (offer: Offer) => {
+  const onPressBuy = (offer: Offer, checkout: Checkout) => {
     const { user } = props;
     if (!user) return null;
-    if (user?.balance < offer?.price) {
+    if (user?.balance < checkout?.total) {
       return {
         status: WalletErros.WithoutBalance,
       };
     }
 
-    const balance = user?.balance - offer.price;
+    const balance = user?.balance - checkout.total;
     dispatch({
       type: WalletActions.BUY_OFFER_NOW,
       payload: {
         balance,
         offer,
+        checkout,
       },
     });
     return {

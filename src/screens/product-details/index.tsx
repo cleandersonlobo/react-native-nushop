@@ -3,9 +3,10 @@ import { useRouteParams } from 'navigation/hooks/useRouteParams';
 import { StyleSheet, Text, ScrollView, View, Image } from 'react-native';
 import { AppColors } from 'core/colors';
 import { NuButton, Separator, TextPrice } from 'components';
-import { MaterialIcons } from '@expo/vector-icons';
-import { Offer } from 'domain/wallet/types';
+import { MaterialIcons, AntDesign } from '@expo/vector-icons';
+import { Offer, Checkout } from 'domain/wallet/types';
 import { useWallet } from 'domain/wallet/wallet.context';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import TransactionModal from './components/transaction-modal';
 
 const ProductScreen = () => {
@@ -13,8 +14,12 @@ const ProductScreen = () => {
     visible: false,
     status: 'without-balance',
   });
-  const { onPressBuy } = useWallet();
   const { offer } = useRouteParams<{ offer: Offer }>();
+  const [checkout, setCheckout] = React.useState<Checkout>({
+    total: offer?.price || 0,
+    quantity: 1,
+  });
+  const { onPressBuy } = useWallet();
   const openModal = useCallback((status?: string) => {
     setState(vals => ({ status: status || vals?.status, visible: true }));
   }, []);
@@ -26,8 +31,25 @@ const ProductScreen = () => {
     }));
   }, []);
 
+  const increaseQuantity = useCallback(() => {
+    setCheckout(vals => ({
+      quantity: vals.quantity + 1,
+      total: (vals.quantity + 1) * offer.price,
+    }));
+  }, [offer.price]);
+  const decreaseQuantity = useCallback(() => {
+    setCheckout(vals =>
+      vals.quantity === 1
+        ? vals
+        : {
+            quantity: vals.quantity - 1,
+            total: (vals.quantity - 1) * offer.price,
+          },
+    );
+  }, [offer.price]);
+
   const onPressBuyNow = () => {
-    const response = onPressBuy(offer);
+    const response = onPressBuy(offer, checkout);
     if (response) openModal(response.status);
   };
 
@@ -54,6 +76,32 @@ const ProductScreen = () => {
             <Text style={styles.description}>{offer?.product.description}</Text>
           </View>
           <View style={styles.viewButton}>
+            <View style={styles.viewCheckout}>
+              <View style={styles.viewQuantity}>
+                <TouchableOpacity onPress={decreaseQuantity}>
+                  <AntDesign
+                    name="minuscircleo"
+                    size={30}
+                    color={AppColors.primary}
+                  />
+                </TouchableOpacity>
+                <Text style={styles.quantityText}>{checkout.quantity}</Text>
+                <TouchableOpacity onPress={increaseQuantity}>
+                  <AntDesign
+                    name="pluscircleo"
+                    size={30}
+                    color={AppColors.primary}
+                  />
+                </TouchableOpacity>
+              </View>
+              <View style={styles.totalPrice}>
+                <TextPrice
+                  numberOfLines={1}
+                  style={styles.totalPriceText}
+                  price={checkout.total}
+                />
+              </View>
+            </View>
             <NuButton
               variant="secondary"
               style={styles.button}
@@ -77,6 +125,25 @@ const ProductScreen = () => {
 export default ProductScreen;
 
 const styles = StyleSheet.create({
+  viewQuantity: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  totalPrice: {
+    marginLeft: 8,
+    flex: 2,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+  },
+  viewCheckout: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 24,
+    justifyContent: 'space-between',
+  },
   container: {
     flex: 1,
     backgroundColor: AppColors.white,
@@ -130,5 +197,14 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     lineHeight: 36,
     color: AppColors.orange,
+  },
+  totalPriceText: {
+    fontSize: 18,
+    lineHeight: 24,
+    color: AppColors.dark,
+  },
+  quantityText: {
+    fontSize: 16,
+    lineHeight: 18,
   },
 });

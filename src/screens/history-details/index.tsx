@@ -40,8 +40,10 @@ const HistoryDetailsScreen = () => {
         <Text style={styles.dateString}>
           {formatHistoryDate(history?.createdAt, 'dd MMM yyyy, hh:mm:ss')}
         </Text>
-        <Text style={styles.text}>{history?.offer.product.name}</Text>
-        <TextPrice style={styles.price} price={history?.offer?.price} />
+        <Text style={styles.text}>
+          {history?.quantity}x {history?.offer.product.name}
+        </Text>
+        <TextPrice style={styles.price} price={history?.total} />
       </View>
     </View>
   );

@@ -1,5 +1,6 @@
 import uuid from 'domain/shared/uuid';
 import { Reducer } from 'react';
+import { Checkout } from 'domain/wallet/types';
 import { Wallet, Offer } from './types';
 import { MockUser } from './__mocks__/user';
 
@@ -18,6 +19,7 @@ export type IWalletActionsType =
       payload: {
         offer: Offer;
         balance: number;
+        checkout: Checkout;
       };
     }
   | {
@@ -37,7 +39,7 @@ export interface WalletState extends Wallet {
 
 export interface WalletProdovider {
   dispatch: React.Dispatch<IWalletActionsType>;
-  onPressBuy: (offer: Offer) => null | { status: string };
+  onPressBuy: (offer: Offer, checkout: Checkout) => null | { status: string };
   toggleSeenBalance: () => void;
 }
 
@@ -73,12 +75,13 @@ export const walletReducer: Reducer<WalletState, IWalletActionsType> = (
       };
     case WalletActions.BUY_OFFER_NOW:
       if (!state?.user) return state;
-      const { offer, balance } = action.payload;
+      const { offer, balance, checkout } = action.payload;
       const { history = [] } = state;
       const newHistory = {
         id: uuid.v4(),
         createdAt: new Date().toISOString(),
         offer,
+        ...checkout,
       };
       return {
         ...state,

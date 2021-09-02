@@ -16,7 +16,12 @@ export interface User {
   balance: number;
 }
 
-export interface WalletHistory {
+export interface Checkout {
+  quantity: number;
+  total: number;
+}
+
+export interface WalletHistory extends Checkout {
   id: string;
   offer: Offer;
   createdAt: string;

@@ -1,6 +1,6 @@
 import { TextPrice } from 'components';
 import React from 'react';
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import { StyleSheet, TouchableOpacity, Text } from 'react-native';
 import { useWallet } from 'domain/wallet/wallet.context';
 import { AppColors } from 'core/colors';
 import { useNavigation } from '@react-navigation/core';
@@ -22,6 +22,7 @@ const BalanceNavHeader = () => {
   };
   return (
     <TouchableOpacity style={styles.button} onPress={onPress}>
+      <Text style={styles.label}>Saldo</Text>
       <TextPrice style={styles.text} price={user?.balance || 0} />
     </TouchableOpacity>
   );
@@ -33,10 +34,15 @@ const styles = StyleSheet.create({
   button: {
     marginRight: 10,
     backgroundColor: AppColors.primaryLight,
-    padding: 10,
+    paddingHorizontal: 10,
+    paddingVertical: 6,
     borderRadius: 10,
   },
   text: {
     color: AppColors.primary,
+  },
+  label: {
+    fontSize: 8,
+    color: AppColors.dark,
   },
 });
