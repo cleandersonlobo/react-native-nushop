@@ -4,8 +4,8 @@ import { AppColors } from 'core/colors';
 import { LocaleService } from 'domain/locale/locale.service';
 import { AntDesign } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/core';
-import { ShopScreenRoutes } from 'screens/shop/routes';
-import { Offer } from '../../../types';
+import { Offer } from 'domain/wallet/types';
+import { ProductDetailsRoutes } from 'screens/product-details/routes';
 
 interface Props {
   item: Offer;
@@ -33,7 +33,7 @@ const ProductCard: React.FC<Props> = ({ item }) => {
 
   const onPress = () => {
     navigation.navigate(
-      ShopScreenRoutes.Product as never,
+      ProductDetailsRoutes.Home as never,
       { offer: item } as never,
     );
   };

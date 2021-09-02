@@ -6,9 +6,15 @@ import TextPrice from 'components/text-price';
 
 interface Props {
   balance: number;
+  name?: string;
 }
 
-const BalanceHeader: React.FC<Props> = ({ balance }) => {
+export enum BalanceHeaderTestIDs {
+  Container = 'BalanceHeaderTestIDs::Container',
+  Balance = 'BalanceHeaderTestIDs::Balance',
+}
+
+const BalanceHeader: React.FC<Props> = ({ balance, name }) => {
   const [hideBalance, setHideBalance] = useState(false);
   const icon = useMemo(() => {
     if (!hideBalance) return 'eye';
@@ -19,10 +25,10 @@ const BalanceHeader: React.FC<Props> = ({ balance }) => {
     setHideBalance(val => !val);
   }, []);
   return (
-    <View style={styles.header}>
+    <View style={styles.header} testID={BalanceHeaderTestIDs.Container}>
       <View style={[styles.content, styles.headerUser]}>
         <View>
-          <Text style={styles.title}>Olá, Jerry Smith</Text>
+          <Text style={styles.title}>Olá{name ? `, ${name}` : ''}</Text>
         </View>
         <TouchableOpacity onPress={onPressToggle}>
           <FontAwesome name={icon} size={30} color={AppColors.light} />
@@ -31,10 +37,14 @@ const BalanceHeader: React.FC<Props> = ({ balance }) => {
       <View style={styles.content}>
         <Text style={styles.label}>Saldo disponível</Text>
         <View style={[hideBalance && styles.hidePrice]}>
-          <TextPrice
-            style={[styles.balanceText, hideBalance && styles.hidePriceText]}
-            price={balance}
-          />
+          {!hideBalance && (
+            <TextPrice
+              testID={BalanceHeaderTestIDs.Balance}
+              style={styles.balanceText}
+              price={balance}
+              numberOfLines={1}
+            />
+          )}
         </View>
       </View>
     </View>
@@ -49,6 +59,7 @@ const styles = StyleSheet.create({
   },
   hidePrice: {
     backgroundColor: AppColors.primaryLight,
+    height: 42,
   },
   hidePriceText: {
     color: AppColors.primaryLight,

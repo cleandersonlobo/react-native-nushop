@@ -1,28 +1,22 @@
 import { AppColors } from 'core/colors';
 import React from 'react';
-import { StyleSheet, View, FlatList } from 'react-native';
+import { StyleSheet, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AccordionBackground from 'components/accordion-background';
-import BalanceHeader from './components/balance/index';
-import HeaderWallet from './components/header';
-import HistoryEmpty from './components/history-empty';
+import { useWallet } from 'domain/wallet/wallet.context';
+import BalanceHeader from './components/balance';
+import WalletHistory from './components/wallet-history';
 
 const WalletScreen = () => {
+  const { user, history } = useWallet();
+
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
       <AccordionBackground accordion />
-      <FlatList
-        contentContainerStyle={styles.scrollView}
-        ListEmptyComponent={<HistoryEmpty />}
-        ListHeaderComponent={
-          <View>
-            <BalanceHeader balance={1000000} />
-            <HeaderWallet />
-          </View>
-        }
-        data={[]}
-        renderItem={() => <View />}
-      />
+      <ScrollView contentContainerStyle={styles.scrollView}>
+        <BalanceHeader balance={user?.balance || 0} name={user?.name} />
+        <WalletHistory history={history} />
+      </ScrollView>
     </SafeAreaView>
   );
 };
@@ -33,11 +27,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: AppColors.white,
-  },
-  body: {
-    flex: 1,
-    backgroundColor: AppColors.white,
-    padding: 20,
   },
   scrollView: {
     flexGrow: 1,

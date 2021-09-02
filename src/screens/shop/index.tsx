@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, FlatList } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { AppColors } from 'core/colors';
 import { MOCK_OFFERS } from './__mocks__/offers';
-import ProductCard from './components/product-card/index';
+import ProductCard from './components/product-card';
 
 const ShopHomeScreen = () => {
   return (

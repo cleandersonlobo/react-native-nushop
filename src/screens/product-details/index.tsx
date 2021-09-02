@@ -2,11 +2,9 @@ import React from 'react';
 import { useRouteParams } from 'navigation/hooks/useRouteParams';
 import { StyleSheet, Text, ScrollView, View, Image } from 'react-native';
 import { AppColors } from 'core/colors';
-import TextPrice from 'components/text-price';
-import Separator, { SeparatorSizes } from 'components/separator';
-import NuButton from 'components/button';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { Offer } from '../types';
+import { NuButton, Separator, TextPrice } from 'components';
+import { MaterialIcons } from '@expo/vector-icons';
+import { Offer } from 'domain/wallet/types';
 
 const ProductScreen = () => {
   const { offer } = useRouteParams<{ offer?: Offer }>();
@@ -33,17 +31,11 @@ const ProductScreen = () => {
               variant="secondary"
               style={styles.button}
               text="Comprar agora"
-            />
-            <Separator size={SeparatorSizes.M} />
-            <NuButton
-              variant="outline"
-              style={styles.button}
-              text="Adicionar à sacola"
               rightComponent={
-                <MaterialCommunityIcons
-                  name="shopping"
+                <MaterialIcons
+                  name="attach-money"
                   size={24}
-                  color={AppColors.orange}
+                  color={AppColors.white}
                 />
               }
             />

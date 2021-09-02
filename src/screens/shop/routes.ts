@@ -1,4 +1,3 @@
-export enum ShopScreenRoutes {
+export enum ShopRoutes {
   Home = 'shopHome',
-  Product = 'shopProduct',
 }
