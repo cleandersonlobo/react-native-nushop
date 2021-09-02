@@ -3,8 +3,9 @@ import { useRouteParams } from 'navigation/hooks/useRouteParams';
 import { StyleSheet, Text, ScrollView, View, Image } from 'react-native';
 import { AppColors } from 'core/colors';
 import TextPrice from 'components/text-price';
-import Separator from 'components/separator';
+import Separator, { SeparatorSizes } from 'components/separator';
 import NuButton from 'components/button';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Offer } from '../types';
 
 const ProductScreen = () => {
@@ -29,15 +30,22 @@ const ProductScreen = () => {
           </View>
           <View style={styles.viewButton}>
             <NuButton
-              variant="outline"
-              style={styles.button}
-              text="Adicionar no carrinho"
-            />
-            <Separator horizontal />
-            <NuButton
               variant="secondary"
               style={styles.button}
               text="Comprar agora"
+            />
+            <Separator size={SeparatorSizes.M} />
+            <NuButton
+              variant="outline"
+              style={styles.button}
+              text="Adicionar à sacola"
+              rightComponent={
+                <MaterialCommunityIcons
+                  name="shopping"
+                  size={24}
+                  color={AppColors.orange}
+                />
+              }
             />
           </View>
         </View>
@@ -54,13 +62,12 @@ const styles = StyleSheet.create({
     backgroundColor: AppColors.white,
   },
   viewButton: {
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    flexDirection: 'row',
-    marginBottom: 16,
+    paddingVertical: 24,
+    borderTopWidth: 1,
+    borderTopColor: AppColors.light,
   },
   button: {
-    width: '50%',
+    width: '100%',
   },
   image: { width: '100%', height: 250 },
   viewImage: {
