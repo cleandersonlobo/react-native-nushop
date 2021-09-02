@@ -1,4 +1,8 @@
-import { IFormatPricePayload } from './types';
+export interface IFormatPricePayload {
+  price: number;
+  currency?: string;
+  options?: Intl.NumberFormatOptions;
+}
 
 class Service {
   formatePrice({ price, options, currency = 'BRL' }: IFormatPricePayload) {
