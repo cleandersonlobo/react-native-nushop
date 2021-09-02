@@ -40,9 +40,18 @@ const HistoryDetailsScreen = () => {
         <Text style={styles.dateString}>
           {formatHistoryDate(history?.createdAt, 'dd MMM yyyy, hh:mm:ss')}
         </Text>
-        <Text style={styles.text}>
-          {history?.quantity}x {history?.offer.product.name}
-        </Text>
+
+        <Text style={styles.text}>{history?.offer.product.name}</Text>
+        {(history?.quantity as number) > 1 ? (
+          <TextPrice
+            style={styles.priceInfo}
+            leftPriceText={`(${history?.quantity}x. `}
+            price={history?.offer.price}
+            rightPriceText=")"
+          />
+        ) : (
+          <Separator />
+        )}
         <TextPrice style={styles.price} price={history?.total} />
       </View>
     </View>
@@ -130,8 +139,14 @@ const styles = StyleSheet.create({
   },
   price: {
     fontSize: 20,
-    lineHeight: 48,
+    lineHeight: 28,
     color: AppColors.dark,
     fontWeight: '400',
+  },
+  priceInfo: {
+    fontSize: 12,
+    color: AppColors.darkLight,
+    fontWeight: '400',
+    lineHeight: 22,
   },
 });

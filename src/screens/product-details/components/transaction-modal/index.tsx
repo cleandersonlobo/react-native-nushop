@@ -73,12 +73,17 @@ const TransactionModal: React.FC<{
                   status === 'success' ? AppColors.success : AppColors.secondary
                 }
               />
-              <Separator size={SeparatorSizes.M} />
+              <Separator />
               <Text style={styles.text}>
                 {status === 'success'
                   ? 'Compra realizada com sucesso!'
-                  : 'Saldo insuficiente.'}
+                  : 'Saldo insuficiente'}
               </Text>
+              {status === 'without-balance' && (
+                <Text style={styles.subtitle}>
+                  Faça um depósito e adiquira a oferta.
+                </Text>
+              )}
               <Separator size={SeparatorSizes.L} />
             </View>
             {status === 'success' && (
@@ -125,6 +130,11 @@ const styles = StyleSheet.create({
     color: AppColors.dark,
     paddingHorizontal: 20,
     fontWeight: '500',
+  },
+  subtitle: {
+    fontSize: 14,
+    lineHeight: 24,
+    color: AppColors.darkLight,
   },
   contentText: {
     alignItems: 'center',
