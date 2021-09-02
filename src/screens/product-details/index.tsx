@@ -1,16 +1,43 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useRouteParams } from 'navigation/hooks/useRouteParams';
 import { StyleSheet, Text, ScrollView, View, Image } from 'react-native';
 import { AppColors } from 'core/colors';
 import { NuButton, Separator, TextPrice } from 'components';
 import { MaterialIcons } from '@expo/vector-icons';
 import { Offer } from 'domain/wallet/types';
+import { useWallet } from 'domain/wallet/wallet.context';
+import TransactionModal from './components/transaction-modal';
 
 const ProductScreen = () => {
-  const { offer } = useRouteParams<{ offer?: Offer }>();
+  const [state, setState] = React.useState({
+    visible: false,
+    status: 'without-balance',
+  });
+  const { onPressBuy } = useWallet();
+  const { offer } = useRouteParams<{ offer: Offer }>();
+  const openModal = useCallback((status?: string) => {
+    setState(vals => ({ status: status || vals?.status, visible: true }));
+  }, []);
+
+  const closeModal = useCallback((status?: string) => {
+    setState(vals => ({
+      visible: false,
+      status: typeof status === 'string' ? status || vals.status : vals.status,
+    }));
+  }, []);
+
+  const onPressBuyNow = () => {
+    const response = onPressBuy(offer);
+    if (response) openModal(response.status);
+  };
 
   return (
     <View style={styles.container}>
+      <TransactionModal
+        visible={state.visible}
+        onClose={closeModal}
+        status={state.status}
+      />
       <ScrollView contentContainerStyle={styles.scroll}>
         <View style={styles.viewImage}>
           <Image
@@ -31,6 +58,7 @@ const ProductScreen = () => {
               variant="secondary"
               style={styles.button}
               text="Comprar agora"
+              onPress={onPressBuyNow}
               rightComponent={
                 <MaterialIcons
                   name="attach-money"

@@ -14,6 +14,7 @@ interface Props {
   text?: string;
   textStyles?: TextProps['style'];
   rightComponent?: React.ReactNode | React.ReactNode[];
+  fullWidth?: boolean;
 }
 
 type ButtonProps = TouchableOpacityProps & Props;
@@ -23,7 +24,9 @@ const NuButton: React.FC<ButtonProps> = ({
   style,
   text,
   textStyles,
+  fullWidth,
   rightComponent,
+  ...restProps
 }) => {
   const buttonStyles = useMemo(() => {
     switch (variant) {
@@ -45,7 +48,14 @@ const NuButton: React.FC<ButtonProps> = ({
     }
   }, [variant]);
   return (
-    <TouchableOpacity style={[styles.button, buttonStyles.button, style]}>
+    <TouchableOpacity
+      style={[
+        styles.button,
+        buttonStyles.button,
+        style,
+        fullWidth && styles.fullWidth,
+      ]}
+      {...restProps}>
       <View style={styles.rightCol}>{rightComponent}</View>
       <Text style={[styles.buttonText, buttonStyles.text, textStyles]}>
         {text}
@@ -60,16 +70,19 @@ const styles = StyleSheet.create({
   buttonText: {
     fontWeight: 'bold',
     fontSize: 14,
-    color: AppColors.primary,
+    color: AppColors.white,
+  },
+  fullWidth: {
+    width: '100%',
   },
   textSecondary: {
     color: AppColors.white,
   },
   textOutline: {
-    color: AppColors.orange,
+    color: AppColors.primary,
   },
   primary: {
-    backgroundColor: AppColors.primaryLight,
+    backgroundColor: AppColors.orange,
   },
   secondary: {
     backgroundColor: AppColors.secondary,
@@ -77,7 +90,7 @@ const styles = StyleSheet.create({
   outline: {
     backgroundColor: AppColors.white,
     borderWidth: 1,
-    borderColor: AppColors.orange,
+    borderColor: AppColors.primary,
   },
   rightCol: {
     left: 32,

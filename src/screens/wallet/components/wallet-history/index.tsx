@@ -4,8 +4,8 @@ import { WalletHistory } from 'domain/wallet/types';
 import { AppColors } from 'core/colors';
 import { useNavigation } from '@react-navigation/core';
 import { HistoryDetailsRoute } from 'screens/history-details/routes';
-import HistoryEmpty from '../history-empty';
-import CardHistoryItem from '../card-history-item';
+import HistoryEmpty from './history-empty';
+import CardHistoryItem from './card-history-item';
 
 interface Props {
   history?: WalletHistory[];
@@ -31,8 +31,6 @@ const WalletHistoryList: React.FC<Props> = ({ history }) => {
     ));
   }, [history, navigation]);
 
-  if (!history) return <HistoryEmpty />;
-
   return (
     <>
       <View style={styles.historyView}>
@@ -40,6 +38,7 @@ const WalletHistoryList: React.FC<Props> = ({ history }) => {
           <Text style={styles.description}>Histórico</Text>
         </View>
       </View>
+      {!history && <HistoryEmpty />}
       <View style={styles.container}>{renderHistory}</View>
     </>
   );

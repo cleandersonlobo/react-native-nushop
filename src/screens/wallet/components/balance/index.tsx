@@ -1,8 +1,9 @@
 import { AppColors } from 'core/colors';
-import React, { useState, useMemo, useCallback } from 'react';
+import React, { useMemo } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import TextPrice from 'components/text-price';
+import { useWallet } from 'domain/wallet/wallet.context';
 
 interface Props {
   balance: number;
@@ -15,22 +16,20 @@ export enum BalanceHeaderTestIDs {
 }
 
 const BalanceHeader: React.FC<Props> = ({ balance, name }) => {
-  const [hideBalance, setHideBalance] = useState(false);
+  const { hideBalance, toggleSeenBalance } = useWallet();
+
   const icon = useMemo(() => {
     if (!hideBalance) return 'eye';
     return 'eye-slash';
   }, [hideBalance]);
 
-  const onPressToggle = useCallback(() => {
-    setHideBalance(val => !val);
-  }, []);
   return (
     <View style={styles.header} testID={BalanceHeaderTestIDs.Container}>
       <View style={[styles.content, styles.headerUser]}>
         <View>
           <Text style={styles.title}>Olá{name ? `, ${name}` : ''}</Text>
         </View>
-        <TouchableOpacity onPress={onPressToggle}>
+        <TouchableOpacity onPress={toggleSeenBalance}>
           <FontAwesome name={icon} size={30} color={AppColors.light} />
         </TouchableOpacity>
       </View>
