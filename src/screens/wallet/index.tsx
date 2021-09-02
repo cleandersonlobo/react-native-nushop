@@ -5,6 +5,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import AccordionBackground from 'components/accordion-background';
 import BalanceHeader from './components/balance/index';
 import HeaderWallet from './components/header';
+import HistoryEmpty from './components/history-empty';
 
 const WalletScreen = () => {
   return (
@@ -12,7 +13,7 @@ const WalletScreen = () => {
       <AccordionBackground accordion />
       <FlatList
         contentContainerStyle={styles.scrollView}
-        ListEmptyComponent={<View style={styles.body} />}
+        ListEmptyComponent={<HistoryEmpty />}
         ListHeaderComponent={
           <View>
             <BalanceHeader balance={1000000} />
