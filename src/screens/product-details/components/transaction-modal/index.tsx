@@ -13,13 +13,36 @@ import { SeparatorSizes } from 'components/separator';
 import { useNavigation } from '@react-navigation/native';
 import { WalletRoutes } from 'screens/wallet/routes';
 import { RootRoutes } from 'navigation/routes';
+import Animated, {
+  Easing,
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+  interpolateColor,
+} from 'react-native-reanimated';
 
+const colors = ['rgba(0, 0, 0, 0.0)', 'rgba(0, 0, 0, 0.09)'];
 const TransactionModal: React.FC<{
   visible?: boolean;
   status?: string;
   onClose: () => void;
 }> = ({ visible, status = 'success', onClose }) => {
+  const color = useSharedValue(0);
+
+  const defaultSpringStyles = useAnimatedStyle(() => {
+    return {
+      backgroundColor: interpolateColor(color.value, [0, 1], colors),
+    };
+  });
+
   const navigation = useNavigation();
+
+  React.useEffect(() => {
+    color.value = withTiming(visible ? 1 : 0, {
+      duration: visible ? 600 : 100,
+      easing: Easing.linear,
+    });
+  }, [color.value, visible]);
 
   const navigateToWallet = () => {
     onClose?.();
@@ -30,6 +53,7 @@ const TransactionModal: React.FC<{
       } as never,
     );
   };
+
   return (
     <Modal
       animationType="slide"
@@ -37,7 +61,7 @@ const TransactionModal: React.FC<{
       visible={visible}
       onDismiss={onClose}>
       <TouchableWithoutFeedback onPress={onClose}>
-        <View style={styles.modal}>
+        <Animated.View style={[styles.modal, defaultSpringStyles]}>
           <View style={styles.content}>
             <View style={styles.contentText}>
               <Ionicons
@@ -83,7 +107,7 @@ const TransactionModal: React.FC<{
               />
             )}
           </View>
-        </View>
+        </Animated.View>
       </TouchableWithoutFeedback>
     </Modal>
   );
@@ -95,7 +119,6 @@ const styles = StyleSheet.create({
   modal: {
     flex: 1,
     padding: 20,
-    backgroundColor: 'rgba(0, 0, 0, 0.06)',
   },
   text: {
     fontSize: 18,
@@ -119,9 +142,9 @@ const styles = StyleSheet.create({
     shadowColor: AppColors.shadowColor,
     shadowOffset: {
       width: 0,
-      height: 0,
+      height: 10,
     },
-    shadowOpacity: 0.5,
+    shadowOpacity: 2,
     shadowRadius: 10,
   },
 });

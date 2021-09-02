@@ -13,13 +13,13 @@ export const WalletProdovider: React.FC = ({ children }) => {
 
   const onPressBuy = (offer: Offer) => {
     const { user } = props;
-    if (user?.balance && user.balance < offer?.price) {
+    if (!user) return null;
+    if (user?.balance < offer?.price) {
       return {
         status: WalletErros.WithoutBalance,
       };
     }
 
-    if (!user) return null;
     const balance = user?.balance - offer.price;
     dispatch({
       type: WalletActions.BUY_OFFER_NOW,
