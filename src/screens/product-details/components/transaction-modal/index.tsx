@@ -13,6 +13,7 @@ import { SeparatorSizes } from 'components/separator';
 import { useNavigation } from '@react-navigation/native';
 import { WalletRoutes } from 'screens/wallet/routes';
 import { RootRoutes } from 'navigation/routes';
+import { ptBRErrors } from 'domain/locale/locale.errors';
 import Animated, {
   Easing,
   useAnimatedStyle,
@@ -23,18 +24,12 @@ import Animated, {
 
 const colors = ['rgba(0, 0, 0, 0.0)', 'rgba(0, 0, 0, 0.09)'];
 const TransactionModal: React.FC<{
+  text?: string | null;
   visible?: boolean;
   status?: string;
   onClose: () => void;
-}> = ({ visible, status = 'success', onClose }) => {
+}> = ({ visible, status, onClose, text }) => {
   const color = useSharedValue(0);
-
-  const defaultSpringStyles = useAnimatedStyle(() => {
-    return {
-      backgroundColor: interpolateColor(color.value, [0, 1], colors),
-    };
-  });
-
   const navigation = useNavigation();
 
   React.useEffect(() => {
@@ -53,6 +48,18 @@ const TransactionModal: React.FC<{
       } as never,
     );
   };
+
+  const textMsg = React.useMemo(() => {
+    if (ptBRErrors[text || '']) return ptBRErrors[text || ''];
+    if (status === 'success') return 'Compra realizada com sucesso!';
+    return 'Saldo insuficiente.';
+  }, [status, text]);
+
+  const defaultSpringStyles = useAnimatedStyle(() => {
+    return {
+      backgroundColor: interpolateColor(color.value, [0, 1], colors),
+    };
+  });
 
   return (
     <Modal
@@ -74,19 +81,10 @@ const TransactionModal: React.FC<{
                 }
               />
               <Separator />
-              <Text style={styles.text}>
-                {status === 'success'
-                  ? 'Compra realizada com sucesso!'
-                  : 'Saldo insuficiente'}
-              </Text>
-              {status === 'without-balance' && (
-                <Text style={styles.subtitle}>
-                  Faça um depósito e adiquira a oferta.
-                </Text>
-              )}
-              <Separator size={SeparatorSizes.L} />
+              <Text style={styles.text}>{textMsg}</Text>
+              <Separator />
             </View>
-            {status === 'success' && (
+            {status === 'success' ? (
               <>
                 <NuButton
                   text="Fechar"
@@ -102,14 +100,16 @@ const TransactionModal: React.FC<{
                   onPress={navigateToWallet}
                 />
               </>
-            )}
-            {status === 'without-balance' && (
-              <NuButton
-                text="Fechar"
-                variant="outline"
-                fullWidth
-                onPress={onClose}
-              />
+            ) : (
+              <>
+                <Separator size={SeparatorSizes.M} />
+                <NuButton
+                  text="Fechar"
+                  variant="outline"
+                  fullWidth
+                  onPress={onClose}
+                />
+              </>
             )}
           </View>
         </Animated.View>
@@ -146,7 +146,7 @@ const styles = StyleSheet.create({
     top: '25%',
     backgroundColor: AppColors.white,
     padding: 20,
-    minHeight: 230,
+    minHeight: 220,
     minWidth: 280,
     borderRadius: 20,
     shadowColor: AppColors.shadowColor,
