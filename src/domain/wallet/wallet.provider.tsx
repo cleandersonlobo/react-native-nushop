@@ -1,5 +1,5 @@
 import React from 'react';
-import { Checkout, Offer, Customer } from 'domain/wallet/types';
+import { Checkout, Offer, TCustomer } from 'domain/wallet/types';
 import { useLazyQuery } from '@apollo/client';
 import { WalletContext } from './wallet.context';
 import {
@@ -18,15 +18,15 @@ export const WalletProdovider: React.FC = ({ children }) => {
   const [props, dispatch] = React.useReducer(walletReducer, initialWalletState);
 
   const onPressBuy = (offer: Offer, checkout: Checkout) => {
-    const { user } = props;
-    if (!user) return null;
-    if (user?.balance < checkout?.total) {
+    const { costumer } = props;
+    if (!costumer) return null;
+    if (costumer?.balance < checkout?.total) {
       return {
         status: WalletErros.WithoutBalance,
       };
     }
 
-    const balance = user?.balance - checkout.total;
+    const balance = costumer?.balance - checkout.total;
     dispatch({
       type: WalletActions.BUY_OFFER_NOW,
       payload: {
@@ -48,7 +48,7 @@ export const WalletProdovider: React.FC = ({ children }) => {
     refetch?.();
   };
 
-  const updateCostumer = (customer: Customer) => {
+  const updateCostumer = (customer: TCustomer) => {
     dispatch({
       type: WalletActions.SET_VIEWER,
       payload: {
@@ -61,6 +61,7 @@ export const WalletProdovider: React.FC = ({ children }) => {
     if (data) updateCostumer(data?.viewer);
   }, [data]);
 
+  // run when opening the APP
   React.useEffect(() => {
     getCostumer();
   }, []);

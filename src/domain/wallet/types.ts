@@ -10,13 +10,13 @@ export interface Offer {
   product: Product;
 }
 
-export interface User {
+export interface Customer {
   id: string;
   name: string;
   balance: number;
 }
 
-export interface Customer extends User {
+export interface TCustomer extends Customer {
   offers: Offer[];
 }
 
@@ -32,6 +32,6 @@ export interface WalletHistory extends Checkout {
 }
 
 export interface Wallet {
-  user?: User;
+  costumer?: Customer;
   history?: WalletHistory[];
 }

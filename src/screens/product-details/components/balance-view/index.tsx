@@ -9,7 +9,7 @@ import { WalletRoutes } from 'screens/wallet/routes';
 
 const BalanceNavHeader = () => {
   const navigation = useNavigation();
-  const { user, hideBalance } = useWallet();
+  const { costumer, hideBalance } = useWallet();
   if (hideBalance) return null;
 
   const onPress = () => {
@@ -23,7 +23,7 @@ const BalanceNavHeader = () => {
   return (
     <TouchableOpacity style={styles.button} onPress={onPress}>
       <Text style={styles.label}>Saldo</Text>
-      <TextPrice style={styles.text} price={user?.balance || 0} />
+      <TextPrice style={styles.text} price={costumer?.balance || 0} />
     </TouchableOpacity>
   );
 };

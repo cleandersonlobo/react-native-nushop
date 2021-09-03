@@ -13,7 +13,7 @@ import { SeparatorSizes } from 'components/separator';
 import { useNavigation } from '@react-navigation/native';
 import { WalletRoutes } from 'screens/wallet/routes';
 import { RootRoutes } from 'navigation/routes';
-import { ptBRErrors } from 'domain/locale/locale.errors';
+import { ptBRErrors } from 'domain/locale/errors';
 import Animated, {
   Easing,
   useAnimatedStyle,
@@ -31,7 +31,7 @@ const TransactionModal: React.FC<{
 }> = ({ visible, status, onClose, text }) => {
   const color = useSharedValue(0);
   const navigation = useNavigation();
-
+  // animation background
   React.useEffect(() => {
     color.value = withTiming(visible ? 1 : 0, {
       duration: visible ? 600 : 100,

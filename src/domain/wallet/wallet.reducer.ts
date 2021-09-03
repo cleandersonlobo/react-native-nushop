@@ -1,12 +1,11 @@
 import uuid from 'domain/shared/uuid';
 import { Reducer } from 'react';
-import { Checkout, Customer } from 'domain/wallet/types';
+import { Checkout, TCustomer } from 'domain/wallet/types';
 import { Wallet, Offer } from './types';
 
 export enum WalletActions {
   SET_VIEWER = 'WalletActions::SET_VIEWER',
   CHANGE_SEEN_BALANCE = 'WalletActions::CHANGE_SEEN_BALANCE',
-  // Shopping
   BUY_OFFER_NOW = 'WalletActions::BUY_OFFER_NOW',
 }
 
@@ -22,7 +21,7 @@ export type IWalletActionsType =
   | {
       type: WalletActions.SET_VIEWER;
       payload: {
-        customer: Customer;
+        customer: TCustomer;
       };
     }
   | {
@@ -32,7 +31,7 @@ export type IWalletActionsType =
 
 export interface WalletState extends Wallet {
   hideBalance: boolean;
-  offers?: Customer['offers'];
+  offers?: TCustomer['offers'];
 }
 
 export interface WalletProdovider {
@@ -44,7 +43,7 @@ export interface WalletProdovider {
   toggleSeenBalance: () => void;
   fetchWallet: () => void;
   getCostumer: () => void;
-  updateCostumer: (customer: Customer) => void;
+  updateCostumer: (customer: TCustomer) => void;
 }
 
 export type IWalletState = WalletState & WalletProdovider;
@@ -59,10 +58,10 @@ export const walletReducer: Reducer<WalletState, IWalletActionsType> = (
 ) => {
   switch (action.type) {
     case WalletActions.SET_VIEWER:
-      const { offers, ...user } = action.payload.customer;
+      const { offers, ...costumer } = action.payload.customer;
       return {
         ...state,
-        user,
+        costumer,
         offers,
       };
     case WalletActions.CHANGE_SEEN_BALANCE:
@@ -71,7 +70,7 @@ export const walletReducer: Reducer<WalletState, IWalletActionsType> = (
         hideBalance: !state.hideBalance,
       };
     case WalletActions.BUY_OFFER_NOW:
-      if (!state?.user) return state;
+      if (!state?.costumer) return state;
       const { offer, balance, checkout } = action.payload;
       const { history = [] } = state;
       const newHistory = {
@@ -83,8 +82,8 @@ export const walletReducer: Reducer<WalletState, IWalletActionsType> = (
       return {
         ...state,
         history: [newHistory, ...history],
-        user: {
-          ...state.user,
+        costumer: {
+          ...state.costumer,
           balance,
         },
       };

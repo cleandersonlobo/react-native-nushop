@@ -8,7 +8,7 @@ import BalanceHeader from './components/balance';
 import WalletHistory from './components/wallet-history';
 
 const WalletScreen = () => {
-  const { user, history, loading, error, getCostumer } = useWallet();
+  const { costumer, history, loading, error, getCostumer } = useWallet();
 
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
@@ -23,7 +23,7 @@ const WalletScreen = () => {
             onRefresh={getCostumer}
           />
         }>
-        <BalanceHeader balance={user?.balance || 0} name={user?.name} />
+        <BalanceHeader balance={costumer?.balance || 0} name={costumer?.name} />
         <WalletHistory
           history={history}
           loading={loading}

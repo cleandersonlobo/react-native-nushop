@@ -1,6 +1,6 @@
-import { User } from '../types';
+import { Customer } from '../types';
 
-export const MockUser: User = {
+export const MockUser: Customer = {
   id: 'cccc3f48-dd2c-43ba-b8de-8945e7ababab',
   name: 'Jerry Smith',
   balance: 1000000,
