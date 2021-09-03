@@ -3,7 +3,7 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { AppColors } from 'core/colors';
 import { LocaleService } from 'domain/locale/locale.service';
 import { AntDesign } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/core';
+import { useNavigation } from '@react-navigation/native';
 import { Offer } from 'domain/wallet/types';
 import { ProductDetailsRoutes } from 'screens/product-details/routes';
 

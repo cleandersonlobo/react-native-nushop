@@ -3,7 +3,7 @@ import React from 'react';
 import { StyleSheet, TouchableOpacity, Text } from 'react-native';
 import { useWallet } from 'domain/wallet/wallet.context';
 import { AppColors } from 'core/colors';
-import { useNavigation } from '@react-navigation/core';
+import { useNavigation } from '@react-navigation/native';
 import { RootRoutes } from 'navigation/routes';
 import { WalletRoutes } from 'screens/wallet/routes';
 

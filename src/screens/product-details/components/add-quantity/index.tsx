@@ -10,7 +10,7 @@ interface Props {
   checkout: Checkout;
   setCheckout: React.Dispatch<React.SetStateAction<Checkout>>;
 }
-
+// TODO: Option to buy more than one offer
 const AddQuantity: React.FC<Props> = ({ offer, checkout, setCheckout }) => {
   const increaseQuantity = React.useCallback(() => {
     setCheckout(vals => ({

@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
 import { useRouteParams } from 'navigation/hooks/useRouteParams';
 import { WalletHistory } from 'domain/wallet/types';
 import { AppColors } from 'core/colors';
-import { useNavigation } from '@react-navigation/core';
+import { useNavigation } from '@react-navigation/native';
 import { AntDesign, Feather } from '@expo/vector-icons';
 import { formatHistoryDate } from 'domain/shared/utils/format-date';
 import { Separator, TextPrice } from 'components';

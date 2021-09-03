@@ -5,22 +5,28 @@ import { AppColors } from 'core/colors';
 import { NuButton, Separator, TextPrice } from 'components';
 import { MaterialIcons } from '@expo/vector-icons';
 import { Offer, Checkout } from 'domain/wallet/types';
-import { useWallet } from 'domain/wallet/wallet.context';
 import { usePurchase } from 'domain/checkout/checkout.service';
+import { useBalanceWallet } from 'domain/wallet/hooks/use-balance-checkout';
 import TransactionModal from './components/transaction-modal';
+import { ProductDetailsIDs } from './types';
 
 const ProductScreen = () => {
+  const { onCheckout } = useBalanceWallet();
+
   const { purchase, loading, data } = usePurchase();
+
   const { offer } = useRouteParams<{ offer: Offer }>();
+
   const [state, setState] = React.useState({
     visible: false,
     status: '',
   });
+
   const [checkout] = React.useState<Checkout>({
     total: offer?.price || 0,
     quantity: 1,
   });
-  const { onPressBuy } = useWallet();
+
   const openModal = useCallback((status?: string) => {
     setState(vals => ({ status: status || vals?.status, visible: true }));
   }, []);
@@ -37,16 +43,18 @@ const ProductScreen = () => {
   };
 
   useEffect(() => {
-    if (data?.purchase.success) {
-      const response = onPressBuy(offer, checkout);
-      if (response) openModal(response.status);
-    } else if (data?.purchase) {
-      openModal('');
+    if (data?.purchase) {
+      if (data?.purchase.success) {
+        const response = onCheckout(offer, checkout);
+        if (response) openModal(response.status);
+      } else {
+        openModal('');
+      }
     }
   }, [data]);
 
   return (
-    <View style={styles.container}>
+    <View style={styles.container} testID={ProductDetailsIDs.Container}>
       <TransactionModal
         visible={state.visible}
         onClose={closeModal}
@@ -70,6 +78,7 @@ const ProductScreen = () => {
           </View>
           <View style={styles.viewButton}>
             <NuButton
+              testID={ProductDetailsIDs.BtnBuyNow}
               variant="secondary"
               style={styles.button}
               text="Comprar agora"

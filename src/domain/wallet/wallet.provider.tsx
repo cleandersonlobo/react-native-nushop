@@ -1,5 +1,5 @@
 import React from 'react';
-import { Checkout, Offer, TCustomer } from 'domain/wallet/types';
+import { TCustomer } from 'domain/wallet/types';
 import { useLazyQuery } from '@apollo/client';
 import { WalletContext } from './wallet.context';
 import {
@@ -7,7 +7,6 @@ import {
   WalletActions,
   walletReducer,
 } from './wallet.reducer';
-import { WalletErros } from './constants';
 import { WalletQueries } from './wallet.service';
 
 export const WalletProdovider: React.FC = ({ children }) => {
@@ -17,35 +16,13 @@ export const WalletProdovider: React.FC = ({ children }) => {
 
   const [props, dispatch] = React.useReducer(walletReducer, initialWalletState);
 
-  const onPressBuy = (offer: Offer, checkout: Checkout) => {
-    const { costumer } = props;
-    if (!costumer) return null;
-    if (costumer?.balance < checkout?.total) {
-      return {
-        status: WalletErros.WithoutBalance,
-      };
-    }
-
-    const balance = costumer?.balance - checkout.total;
-    dispatch({
-      type: WalletActions.BUY_OFFER_NOW,
-      payload: {
-        balance,
-        offer,
-        checkout,
-      },
-    });
-    return {
-      status: WalletErros.Success,
-    };
-  };
-
   const toggleSeenBalance = () => {
     dispatch({ type: WalletActions.CHANGE_SEEN_BALANCE });
   };
 
-  const fetchWallet = async () => {
-    refetch?.();
+  const refetchWallet = async () => {
+    if (called) refetch?.();
+    else getCostumer();
   };
 
   const updateCostumer = (customer: TCustomer) => {
@@ -74,10 +51,9 @@ export const WalletProdovider: React.FC = ({ children }) => {
         called,
         error,
         getCostumer,
-        fetchWallet,
+        refetchWallet,
         updateCostumer,
         dispatch,
-        onPressBuy,
         toggleSeenBalance,
       }}>
       {children}

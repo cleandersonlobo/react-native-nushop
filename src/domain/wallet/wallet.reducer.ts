@@ -39,9 +39,8 @@ export interface WalletProdovider {
   called: boolean;
   error?: unknown;
   dispatch: React.Dispatch<IWalletActionsType>;
-  onPressBuy: (offer: Offer, checkout: Checkout) => null | { status: string };
   toggleSeenBalance: () => void;
-  fetchWallet: () => void;
+  refetchWallet: () => void;
   getCostumer: () => void;
   updateCostumer: (customer: TCustomer) => void;
 }

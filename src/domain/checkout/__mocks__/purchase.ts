@@ -5,7 +5,7 @@ export const MockPurshaseSuccess = {
   },
 };
 
-export const MockPurshaseGenericFailure = {
+export const MockPurshaseInsufficientFunds = {
   purchase: {
     success: false,
     errorMessage: null,
@@ -26,9 +26,9 @@ export const MockPurshaseNotHaveMoney = {
   },
 };
 
-export const MocksPurshase = {
+export const MocksPurshase: { [key: string]: any } = {
   success: MockPurshaseSuccess,
-  generic: MockPurshaseGenericFailure,
+  insufficientFunds: MockPurshaseInsufficientFunds,
   offerExpired: MockPurshaseOfferExpired,
-  doNotHaveMoney: MockPurshaseNotHaveMoney,
+  youDoNotHaveMoney: MockPurshaseNotHaveMoney,
 };

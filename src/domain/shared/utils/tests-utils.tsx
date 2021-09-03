@@ -18,7 +18,7 @@ export const renderHookApollo = <T extends () => any>(
   });
 };
 
-const customRender = (ui: any, { wrapperProps, mocks }: any) =>
+export const customRender = (ui: any, { mocks }: any) =>
   render(ui, {
     wrapper: ({ children }) => (
       <MockedProvider mocks={mocks} addTypename={false}>

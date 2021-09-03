@@ -8,7 +8,7 @@ import OffersEmpty from './components/offers-empty';
 import { ShopTestIDS } from './types';
 
 const ShopHomeScreen = () => {
-  const { offers, loading, fetchWallet } = useWallet();
+  const { offers, loading, refetchWallet } = useWallet();
   return (
     <SafeAreaView edges={['top']} style={styles.container}>
       <FlatList
@@ -20,7 +20,7 @@ const ShopHomeScreen = () => {
         }
         ListEmptyComponent={<OffersEmpty />}
         refreshing={loading}
-        onRefresh={fetchWallet}
+        onRefresh={refetchWallet}
         data={offers}
         keyExtractor={item => item.id}
         renderItem={({ item }) => (

@@ -6,14 +6,6 @@ import {
   View,
   TouchableWithoutFeedback,
 } from 'react-native';
-import { AppColors } from 'core/colors';
-import { Ionicons } from '@expo/vector-icons';
-import { NuButton, Separator } from 'components';
-import { SeparatorSizes } from 'components/separator';
-import { useNavigation } from '@react-navigation/native';
-import { WalletRoutes } from 'screens/wallet/routes';
-import { RootRoutes } from 'navigation/routes';
-import { ptBRErrors } from 'domain/locale/errors';
 import Animated, {
   Easing,
   useAnimatedStyle,
@@ -21,8 +13,19 @@ import Animated, {
   withTiming,
   interpolateColor,
 } from 'react-native-reanimated';
+import { AppColors } from 'core/colors';
+import { Ionicons } from '@expo/vector-icons';
+import { NuButton, Separator } from 'components';
+import { SeparatorSizes } from 'components/separator';
+import { useNavigation } from '@react-navigation/native';
+import { WalletRoutes } from 'screens/wallet/routes';
+import { RootRoutes } from 'navigation/routes';
+import { ptBRErrors } from 'domain/checkout/utils/locale-errors';
+import { ProductDetailsIDs } from 'screens/product-details/types';
+import { TransactionMessages } from 'domain/checkout/checkout.interface';
 
 const colors = ['rgba(0, 0, 0, 0.0)', 'rgba(0, 0, 0, 0.09)'];
+
 const TransactionModal: React.FC<{
   text?: string | null;
   visible?: boolean;
@@ -51,8 +54,8 @@ const TransactionModal: React.FC<{
 
   const textMsg = React.useMemo(() => {
     if (ptBRErrors[text || '']) return ptBRErrors[text || ''];
-    if (status === 'success') return 'Compra realizada com sucesso!';
-    return 'Saldo insuficiente.';
+    if (status === 'success') return TransactionMessages.PurchaseSuccessfully;
+    return TransactionMessages.InsufficientFunds;
   }, [status, text]);
 
   const defaultSpringStyles = useAnimatedStyle(() => {
@@ -67,7 +70,9 @@ const TransactionModal: React.FC<{
       transparent
       visible={visible}
       onDismiss={onClose}>
-      <TouchableWithoutFeedback onPress={onClose}>
+      <TouchableWithoutFeedback
+        onPress={onClose}
+        testID={ProductDetailsIDs.TransactionModal}>
         <Animated.View style={[styles.modal, defaultSpringStyles]}>
           <View style={styles.content}>
             <View style={styles.contentText}>
@@ -84,32 +89,23 @@ const TransactionModal: React.FC<{
               <Text style={styles.text}>{textMsg}</Text>
               <Separator />
             </View>
-            {status === 'success' ? (
-              <>
-                <NuButton
-                  text="Fechar"
-                  variant="outline"
-                  fullWidth
-                  onPress={onClose}
-                />
-                <Separator size={SeparatorSizes.M} />
-
-                <NuButton
-                  text="Ver histórico"
-                  fullWidth
-                  onPress={navigateToWallet}
-                />
-              </>
-            ) : (
-              <>
-                <Separator size={SeparatorSizes.M} />
-                <NuButton
-                  text="Fechar"
-                  variant="outline"
-                  fullWidth
-                  onPress={onClose}
-                />
-              </>
+            <NuButton
+              testID={ProductDetailsIDs.CloseTransactionModal}
+              text="Fechar"
+              variant="outline"
+              accessibilityLabel="Close modal"
+              fullWidth
+              onPress={onClose}
+            />
+            <Separator size={SeparatorSizes.M} />
+            {status === 'success' && (
+              <NuButton
+                testID={ProductDetailsIDs.ButtonSeenHistory}
+                text="Ver histórico"
+                fullWidth
+                onPress={navigateToWallet}
+                accessibilityLabel="See my history transactions"
+              />
             )}
           </View>
         </Animated.View>
