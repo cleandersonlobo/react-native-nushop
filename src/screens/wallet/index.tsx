@@ -1,6 +1,6 @@
 import { AppColors } from 'core/colors';
 import React from 'react';
-import { StyleSheet, ScrollView } from 'react-native';
+import { StyleSheet, ScrollView, RefreshControl } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AccordionBackground from 'components/accordion-background';
 import { useWallet } from 'domain/wallet/wallet.context';
@@ -8,14 +8,28 @@ import BalanceHeader from './components/balance';
 import WalletHistory from './components/wallet-history';
 
 const WalletScreen = () => {
-  const { user, history, loading } = useWallet();
+  const { user, history, loading, error, getCostumer } = useWallet();
 
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
       <AccordionBackground accordion />
-      <ScrollView contentContainerStyle={styles.scrollView}>
+      <ScrollView
+        contentContainerStyle={styles.scrollView}
+        refreshControl={
+          <RefreshControl
+            progressBackgroundColor={AppColors.white}
+            tintColor={AppColors.white}
+            refreshing={loading}
+            onRefresh={getCostumer}
+          />
+        }>
         <BalanceHeader balance={user?.balance || 0} name={user?.name} />
-        <WalletHistory history={history} loading={loading} />
+        <WalletHistory
+          history={history}
+          loading={loading}
+          error={error}
+          getCostumer={getCostumer}
+        />
       </ScrollView>
     </SafeAreaView>
   );

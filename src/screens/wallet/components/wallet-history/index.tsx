@@ -6,13 +6,21 @@ import { useNavigation } from '@react-navigation/core';
 import { HistoryDetailsRoute } from 'screens/history-details/routes';
 import HistoryEmpty from './history-empty';
 import CardHistoryItem from './card-history-item';
+import WalletErrorLoad from '../wallet-error-load';
 
 interface Props {
   history?: WalletHistory[];
   loading?: boolean;
+  error?: unknown;
+  getCostumer: () => void;
 }
 
-const WalletHistoryList: React.FC<Props> = ({ history, loading }) => {
+const WalletHistoryList: React.FC<Props> = ({
+  history,
+  loading,
+  error,
+  getCostumer,
+}) => {
   const navigation = useNavigation();
 
   const renderHistory = React.useMemo(() => {
@@ -39,7 +47,8 @@ const WalletHistoryList: React.FC<Props> = ({ history, loading }) => {
           <Text style={styles.description}>Histórico</Text>
         </View>
       </View>
-      {!history && <HistoryEmpty loading={loading} />}
+      {!history && !error && <HistoryEmpty loading={loading} />}
+      {error && <WalletErrorLoad onPress={getCostumer} />}
       <View style={styles.container}>{renderHistory}</View>
     </>
   );

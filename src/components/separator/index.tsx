@@ -16,7 +16,7 @@ const Sizes = {
 };
 
 export interface SeparatorProps {
-  size?: SeparatorSizes;
+  size?: SeparatorSizes | 'S' | 'M' | 'L' | 'LX';
   horizontal?: boolean;
 }
 

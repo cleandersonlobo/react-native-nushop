@@ -11,7 +11,7 @@ import { WalletErros } from './constants';
 import { WalletQueries } from './wallet.service';
 
 export const WalletProdovider: React.FC = ({ children }) => {
-  const [getViewer, { loading, error, data, called, refetch }] = useLazyQuery(
+  const [getCostumer, { loading, error, data, called, refetch }] = useLazyQuery(
     WalletQueries.viewer,
   );
 
@@ -48,7 +48,7 @@ export const WalletProdovider: React.FC = ({ children }) => {
     refetch?.();
   };
 
-  const updateViewer = (customer: Customer) => {
+  const updateCostumer = (customer: Customer) => {
     dispatch({
       type: WalletActions.SET_VIEWER,
       payload: {
@@ -58,12 +58,12 @@ export const WalletProdovider: React.FC = ({ children }) => {
   };
 
   React.useEffect(() => {
-    if (data) updateViewer(data?.viewer);
+    if (data) updateCostumer(data?.viewer);
   }, [data]);
 
   React.useEffect(() => {
-    getViewer();
-  }, [getViewer]);
+    getCostumer();
+  }, []);
 
   return (
     <WalletContext.Provider
@@ -72,8 +72,9 @@ export const WalletProdovider: React.FC = ({ children }) => {
         loading,
         called,
         error,
+        getCostumer,
         fetchWallet,
-        updateViewer,
+        updateCostumer,
         dispatch,
         onPressBuy,
         toggleSeenBalance,

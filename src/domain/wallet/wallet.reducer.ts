@@ -43,7 +43,8 @@ export interface WalletProdovider {
   onPressBuy: (offer: Offer, checkout: Checkout) => null | { status: string };
   toggleSeenBalance: () => void;
   fetchWallet: () => void;
-  updateViewer: (customer: Customer) => void;
+  getCostumer: () => void;
+  updateCostumer: (customer: Customer) => void;
 }
 
 export type IWalletState = WalletState & WalletProdovider;

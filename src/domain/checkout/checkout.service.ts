@@ -17,7 +17,6 @@ export const CheckoutMutations = {
 };
 
 export const usePurchase = () => {
-  // const {} = useWallet();
   const [purchase, { loading, data, error }] = useMutation<TDataPurchase>(
     CheckoutMutations.purchase,
   );
