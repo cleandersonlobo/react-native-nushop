@@ -4,17 +4,20 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { AppColors } from 'core/colors';
 import { useWallet } from 'domain/wallet/wallet.context';
 import ProductCard from './components/product-card';
+import OffersEmpty from './components/offers-empty';
 
 const ShopHomeScreen = () => {
   const { offers, loading, fetchWallet } = useWallet();
   return (
     <SafeAreaView edges={['top']} style={styles.container}>
       <FlatList
+        contentContainerStyle={styles.container}
         ListHeaderComponent={
           <View style={styles.headerTitle}>
             <Text style={styles.title}>Ofertas</Text>
           </View>
         }
+        ListEmptyComponent={<OffersEmpty />}
         refreshing={loading}
         onRefresh={fetchWallet}
         data={offers}
