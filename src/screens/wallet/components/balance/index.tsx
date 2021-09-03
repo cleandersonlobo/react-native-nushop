@@ -3,33 +3,35 @@ import React, { useMemo } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import TextPrice from 'components/text-price';
-import { useWallet } from 'domain/wallet/wallet.context';
+import { WalletTestIDs } from 'screens/wallet/types';
 
 interface Props {
   balance: number;
   name?: string;
+  hideBalance?: boolean;
+  toggleSeenBalance?: () => void;
 }
 
-export enum BalanceHeaderTestIDs {
-  Container = 'BalanceHeaderTestIDs::Container',
-  Balance = 'BalanceHeaderTestIDs::Balance',
-}
-
-const BalanceHeader: React.FC<Props> = ({ balance, name }) => {
-  const { hideBalance, toggleSeenBalance } = useWallet();
-
+const BalanceHeader: React.FC<Props> = ({
+  balance,
+  name,
+  hideBalance,
+  toggleSeenBalance,
+}) => {
   const icon = useMemo(() => {
     if (!hideBalance) return 'eye';
     return 'eye-slash';
   }, [hideBalance]);
 
   return (
-    <View style={styles.header} testID={BalanceHeaderTestIDs.Container}>
+    <View style={styles.header} testID={WalletTestIDs.BalanceContainer}>
       <View style={[styles.content, styles.headerUser]}>
         <View>
           <Text style={styles.title}>Olá{name ? `, ${name}` : ''}</Text>
         </View>
-        <TouchableOpacity onPress={toggleSeenBalance}>
+        <TouchableOpacity
+          onPress={toggleSeenBalance}
+          testID={WalletTestIDs.BtnToggleSeenBalance}>
           <FontAwesome name={icon} size={30} color={AppColors.light} />
         </TouchableOpacity>
       </View>
@@ -38,7 +40,7 @@ const BalanceHeader: React.FC<Props> = ({ balance, name }) => {
         <View style={[hideBalance && styles.hidePrice]}>
           {!hideBalance && (
             <TextPrice
-              testID={BalanceHeaderTestIDs.Balance}
+              testID={WalletTestIDs.Balance}
               style={styles.balanceText}
               price={balance}
               numberOfLines={1}

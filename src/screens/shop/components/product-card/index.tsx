@@ -9,9 +9,10 @@ import { ProductDetailsRoutes } from 'screens/product-details/routes';
 
 interface Props {
   item: Offer;
+  testID?: string;
 }
 
-const ProductCard: React.FC<Props> = ({ item }) => {
+const ProductCard: React.FC<Props> = ({ item, testID }) => {
   const navigation = useNavigation();
 
   const price = useMemo(
@@ -39,7 +40,11 @@ const ProductCard: React.FC<Props> = ({ item }) => {
   };
 
   return (
-    <TouchableOpacity style={styles.card} onPress={onPress}>
+    <TouchableOpacity
+      style={styles.card}
+      onPress={onPress}
+      testID={testID}
+      accessibilityLabel={`Open ${item.product.name}`}>
       <View style={styles.viewImage}>
         <Image
           source={{ uri: item.product.image }}

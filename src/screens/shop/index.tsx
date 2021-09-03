@@ -5,6 +5,7 @@ import { AppColors } from 'core/colors';
 import { useWallet } from 'domain/wallet/wallet.context';
 import ProductCard from './components/product-card';
 import OffersEmpty from './components/offers-empty';
+import { ShopTestIDS } from './types';
 
 const ShopHomeScreen = () => {
   const { offers, loading, fetchWallet } = useWallet();
@@ -22,7 +23,9 @@ const ShopHomeScreen = () => {
         onRefresh={fetchWallet}
         data={offers}
         keyExtractor={item => item.id}
-        renderItem={({ item }) => <ProductCard item={item} />}
+        renderItem={({ item }) => (
+          <ProductCard testID={ShopTestIDS.ProductCard} item={item} />
+        )}
       />
     </SafeAreaView>
   );

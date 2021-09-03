@@ -3,10 +3,11 @@ import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { AppColors } from 'core/colors';
+import { WalletTestIDs } from 'screens/wallet/types';
 
-const WalletErrorLoad: React.FC<{ onPress: () => void }> = ({ onPress }) => {
+const WalletErrorLoad: React.FC<{ onPress?: () => void }> = ({ onPress }) => {
   return (
-    <View style={styles.content}>
+    <View style={styles.content} testID={WalletTestIDs.WalletError}>
       <MaterialIcons name="error-outline" size={48} color={AppColors.primary} />
       <Separator />
       <Text style={styles.text}>Ops! Ocorreu algum error inesperado.</Text>
@@ -15,7 +16,7 @@ const WalletErrorLoad: React.FC<{ onPress: () => void }> = ({ onPress }) => {
         onPress={onPress}
         style={styles.button}
         variant="outline"
-        text="Tente Novamente"
+        text="Tentar novamente"
       />
     </View>
   );

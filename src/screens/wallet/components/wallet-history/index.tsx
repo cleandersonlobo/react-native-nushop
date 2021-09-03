@@ -2,8 +2,9 @@ import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { WalletHistory } from 'domain/wallet/types';
 import { AppColors } from 'core/colors';
-import { useNavigation } from '@react-navigation/core';
+import { useNavigation } from '@react-navigation/native';
 import { HistoryDetailsRoute } from 'screens/history-details/routes';
+import { WalletTestIDs } from 'screens/wallet/types';
 import HistoryEmpty from './history-empty';
 import CardHistoryItem from './card-history-item';
 import WalletErrorLoad from '../wallet-error-load';
@@ -12,7 +13,7 @@ interface Props {
   history?: WalletHistory[];
   loading?: boolean;
   error?: unknown;
-  getCostumer: () => void;
+  getCostumer?: () => void;
 }
 
 const WalletHistoryList: React.FC<Props> = ({
@@ -28,6 +29,7 @@ const WalletHistoryList: React.FC<Props> = ({
 
     return history.map(item => (
       <CardHistoryItem
+        testID={WalletTestIDs.WalletHistoryItem}
         key={item?.id}
         item={item}
         onPress={() => {

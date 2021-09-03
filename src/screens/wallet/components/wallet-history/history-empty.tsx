@@ -3,6 +3,7 @@ import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
 import { SimpleLineIcons } from '@expo/vector-icons';
 import { AppColors } from 'core/colors';
 import Separator, { SeparatorSizes } from 'components/separator';
+import { WalletTestIDs } from 'screens/wallet/types';
 
 interface Props {
   loading?: boolean;
@@ -10,7 +11,7 @@ interface Props {
 
 const HistoryEmpty: React.FC<Props> = ({ loading }) => {
   return (
-    <View style={styles.container}>
+    <View style={styles.container} testID={WalletTestIDs.WalletHistoryEmpty}>
       <View style={styles.content}>
         <SimpleLineIcons name="wallet" size={32} color={AppColors.darkLight} />
         <Separator size={SeparatorSizes.M} />

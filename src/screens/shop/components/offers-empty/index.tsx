@@ -3,10 +3,11 @@ import { StyleSheet, Text, View } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { AppColors } from 'core/colors';
 import { Separator } from 'components';
+import { ShopTestIDS } from 'screens/shop/types';
 
 const OffersEmpty = () => {
   return (
-    <View style={styles.container}>
+    <View style={styles.container} testID={ShopTestIDS.EmptyOffers}>
       <MaterialIcons name="local-offer" size={48} color={AppColors.gray} />
       <Separator />
       <View>

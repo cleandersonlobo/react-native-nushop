@@ -9,11 +9,16 @@ import { formatHistoryDate } from 'domain/shared/utils/format-date';
 interface Props {
   onPress?: () => void;
   item: WalletHistory;
+  testID?: string;
 }
 
-const CardHistoryItem: React.FC<Props> = ({ item, onPress }) => {
+const CardHistoryItem: React.FC<Props> = ({ item, onPress, testID }) => {
   return (
-    <TouchableOpacity style={styles.card} onPress={onPress}>
+    <TouchableOpacity
+      style={styles.card}
+      onPress={onPress}
+      testID={testID}
+      accessibilityLabel="Button to seen history item">
       <View style={styles.leftCol}>
         <View style={styles.circleIcon}>
           <Feather name="shopping-bag" size={20} color={AppColors.darkLight} />

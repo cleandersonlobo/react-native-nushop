@@ -10,8 +10,8 @@ interface Props extends TextProps {
 
 const TextPrice: React.FC<Props> = ({
   price,
-  leftPriceText = '',
-  rightPriceText = '',
+  leftPriceText,
+  rightPriceText,
   ...restProps
 }) => {
   const value = useMemo(
@@ -20,9 +20,9 @@ const TextPrice: React.FC<Props> = ({
   );
   return (
     <Text {...restProps}>
-      {leftPriceText}
+      {leftPriceText && leftPriceText}
       {value}
-      {rightPriceText}
+      {rightPriceText && rightPriceText}
     </Text>
   );
 };

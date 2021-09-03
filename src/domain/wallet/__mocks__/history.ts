@@ -3,6 +3,8 @@ import { WalletHistory } from '../types';
 export const MockWalletHistory: WalletHistory[] = [
   {
     id: 'history-1',
+    quantity: 1,
+    total: 5000,
     offer: {
       id: 'offer/portal-gun',
       price: 5000,
@@ -19,6 +21,8 @@ export const MockWalletHistory: WalletHistory[] = [
   },
   {
     id: 'history-2',
+    quantity: 1,
+    total: 5507,
     offer: {
       id: 'offer/microverse-battery',
       price: 5507,
