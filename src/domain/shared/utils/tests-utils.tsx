@@ -3,7 +3,7 @@ import React from 'react';
 import { renderHook } from '@testing-library/react-hooks';
 import { render } from '@testing-library/react-native';
 import { MockedProvider } from '@apollo/client/testing';
-import { WalletProdovider } from 'domain/wallet/wallet.provider';
+import { WalletProvider } from 'domain/wallet/wallet.provider';
 
 export const renderHookApollo = <T extends () => any>(
   hookMethod: T,
@@ -22,7 +22,7 @@ export const customRender = (ui: any, { mocks }: any) =>
   render(ui, {
     wrapper: ({ children }) => (
       <MockedProvider mocks={mocks} addTypename={false}>
-        <WalletProdovider>{children}</WalletProdovider>
+        <WalletProvider>{children}</WalletProvider>
       </MockedProvider>
     ),
   });

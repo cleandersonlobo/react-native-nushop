@@ -34,7 +34,7 @@ export interface WalletState extends Wallet {
   offers?: TCustomer['offers'];
 }
 
-export interface WalletProdovider {
+export interface WalletProvider {
   loading: boolean;
   called: boolean;
   error?: unknown;
@@ -45,7 +45,7 @@ export interface WalletProdovider {
   updateCostumer: (customer: TCustomer) => void;
 }
 
-export type IWalletState = WalletState & WalletProdovider;
+export type IWalletState = WalletState & WalletProvider;
 
 export const initialWalletState = {
   hideBalance: false,

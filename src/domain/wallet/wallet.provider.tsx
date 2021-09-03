@@ -9,7 +9,7 @@ import {
 } from './wallet.reducer';
 import { WalletQueries } from './wallet.service';
 
-export const WalletProdovider: React.FC = ({ children }) => {
+export const WalletProvider: React.FC = ({ children }) => {
   const [getCostumer, { loading, error, data, called, refetch }] = useLazyQuery(
     WalletQueries.viewer,
   );

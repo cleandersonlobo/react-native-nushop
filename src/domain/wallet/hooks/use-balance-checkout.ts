@@ -1,5 +1,4 @@
-import { useWallet } from 'domain/wallet/wallet.context';
-import { Checkout, Offer } from 'domain/wallet/types';
+import { Checkout, Offer, useWallet } from 'domain/wallet';
 import { WalletErros } from '../constants';
 import { WalletActions } from '../wallet.reducer';
 

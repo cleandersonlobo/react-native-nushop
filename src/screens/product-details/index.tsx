@@ -4,9 +4,8 @@ import { StyleSheet, Text, ScrollView, View, Image } from 'react-native';
 import { AppColors } from 'core/colors';
 import { NuButton, Separator, TextPrice } from 'components';
 import { MaterialIcons } from '@expo/vector-icons';
-import { Offer, Checkout } from 'domain/wallet/types';
+import { Offer, Checkout, useBalanceWallet } from 'domain/wallet';
 import { usePurchase } from 'domain/checkout/checkout.service';
-import { useBalanceWallet } from 'domain/wallet/hooks/use-balance-checkout';
 import TransactionModal from './components/transaction-modal';
 import { ProductDetailsIDs } from './types';
 
