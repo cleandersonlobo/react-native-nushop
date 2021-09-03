@@ -1,17 +1,30 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
 import { SimpleLineIcons } from '@expo/vector-icons';
 import { AppColors } from 'core/colors';
 import Separator, { SeparatorSizes } from 'components/separator';
 
-const HistoryEmpty = () => {
+interface Props {
+  loading?: boolean;
+}
+
+const HistoryEmpty: React.FC<Props> = ({ loading }) => {
   return (
     <View style={styles.container}>
       <View style={styles.content}>
         <SimpleLineIcons name="wallet" size={32} color={AppColors.darkLight} />
         <Separator size={SeparatorSizes.M} />
-        <Text style={styles.text}>Você ainda não fez nenhuma compra.</Text>
-        <Text style={styles.text}>Suas atividades aprecerão aqui.</Text>
+        {loading ? (
+          <>
+            <Text style={styles.text}>Carregando dados da carteira...</Text>
+            <ActivityIndicator size={32} color={AppColors.darkLight} />
+          </>
+        ) : (
+          <>
+            <Text style={styles.text}>Você ainda não fez nenhuma compra.</Text>
+            <Text style={styles.text}>Suas atividades aprecerão aqui.</Text>
+          </>
+        )}
       </View>
     </View>
   );

@@ -1,13 +1,10 @@
 import uuid from 'domain/shared/uuid';
 import { Reducer } from 'react';
-import { Checkout } from 'domain/wallet/types';
+import { Checkout, Customer } from 'domain/wallet/types';
 import { Wallet, Offer } from './types';
-import { MockUser } from './__mocks__/user';
 
 export enum WalletActions {
-  REQUEST = 'WalletActions::REQUEST',
-  REQUEST_SUCCESS = 'WalletActions::REQUEST_SUCCESS',
-  REQUEST_FAILURE = 'WalletActions::REQUEST_FAILURE',
+  SET_VIEWER = 'WalletActions::SET_VIEWER',
   CHANGE_SEEN_BALANCE = 'WalletActions::CHANGE_SEEN_BALANCE',
   // Shopping
   BUY_OFFER_NOW = 'WalletActions::BUY_OFFER_NOW',
@@ -23,33 +20,36 @@ export type IWalletActionsType =
       };
     }
   | {
-      type:
-        | WalletActions.REQUEST
-        | WalletActions.REQUEST_FAILURE
-        | WalletActions.CHANGE_SEEN_BALANCE;
+      type: WalletActions.SET_VIEWER;
+      payload: {
+        customer: Customer;
+      };
+    }
+  | {
+      type: WalletActions.CHANGE_SEEN_BALANCE;
       payload?: unknown;
     };
 
 export interface WalletState extends Wallet {
-  isFetching: boolean;
-  isError: boolean;
-  error?: unknown;
   hideBalance: boolean;
+  offers?: Customer['offers'];
 }
 
 export interface WalletProdovider {
+  loading: boolean;
+  called: boolean;
+  error?: unknown;
   dispatch: React.Dispatch<IWalletActionsType>;
   onPressBuy: (offer: Offer, checkout: Checkout) => null | { status: string };
   toggleSeenBalance: () => void;
+  fetchWallet: () => void;
+  updateViewer: (customer: Customer) => void;
 }
 
 export type IWalletState = WalletState & WalletProdovider;
 
 export const initialWalletState = {
-  isFetching: false,
-  isError: false,
   hideBalance: false,
-  user: MockUser,
 };
 
 export const walletReducer: Reducer<WalletState, IWalletActionsType> = (
@@ -57,16 +57,12 @@ export const walletReducer: Reducer<WalletState, IWalletActionsType> = (
   action: IWalletActionsType,
 ) => {
   switch (action.type) {
-    case WalletActions.REQUEST:
+    case WalletActions.SET_VIEWER:
+      const { offers, ...user } = action.payload.customer;
       return {
         ...state,
-        isFetching: true,
-      };
-    case WalletActions.REQUEST_FAILURE:
-      return {
-        ...state,
-        isFetching: false,
-        isError: true,
+        user,
+        offers,
       };
     case WalletActions.CHANGE_SEEN_BALANCE:
       return {

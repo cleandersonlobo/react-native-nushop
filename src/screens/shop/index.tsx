@@ -2,10 +2,11 @@ import React from 'react';
 import { StyleSheet, Text, View, FlatList } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { AppColors } from 'core/colors';
-import { MOCK_OFFERS } from './__mocks__/offers';
+import { useWallet } from 'domain/wallet/wallet.context';
 import ProductCard from './components/product-card';
 
 const ShopHomeScreen = () => {
+  const { offers, loading, fetchWallet } = useWallet();
   return (
     <SafeAreaView edges={['top']} style={styles.container}>
       <FlatList
@@ -14,7 +15,9 @@ const ShopHomeScreen = () => {
             <Text style={styles.title}>Ofertas</Text>
           </View>
         }
-        data={MOCK_OFFERS.offers}
+        refreshing={loading}
+        onRefresh={fetchWallet}
+        data={offers}
         keyExtractor={item => item.id}
         renderItem={({ item }) => <ProductCard item={item} />}
       />

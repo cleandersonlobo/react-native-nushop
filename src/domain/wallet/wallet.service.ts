@@ -21,11 +21,3 @@ export const WalletQueries = {
     }
   `,
 };
-
-export const WalletMutation = {
-  purchase: gql`
-    mutation Purchase($offerId: ID!) {
-      purchase(offerId: $offerId)
-    }
-  `,
-};

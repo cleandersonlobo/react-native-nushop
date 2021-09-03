@@ -9,9 +9,10 @@ import CardHistoryItem from './card-history-item';
 
 interface Props {
   history?: WalletHistory[];
+  loading?: boolean;
 }
 
-const WalletHistoryList: React.FC<Props> = ({ history }) => {
+const WalletHistoryList: React.FC<Props> = ({ history, loading }) => {
   const navigation = useNavigation();
 
   const renderHistory = React.useMemo(() => {
@@ -38,7 +39,7 @@ const WalletHistoryList: React.FC<Props> = ({ history }) => {
           <Text style={styles.description}>Histórico</Text>
         </View>
       </View>
-      {!history && <HistoryEmpty />}
+      {!history && <HistoryEmpty loading={loading} />}
       <View style={styles.container}>{renderHistory}</View>
     </>
   );

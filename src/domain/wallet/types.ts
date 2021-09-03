@@ -16,6 +16,10 @@ export interface User {
   balance: number;
 }
 
+export interface Customer extends User {
+  offers: Offer[];
+}
+
 export interface Checkout {
   quantity: number;
   total: number;

@@ -1,5 +1,6 @@
 import React from 'react';
-import { Checkout, Offer } from 'domain/wallet/types';
+import { Checkout, Offer, Customer } from 'domain/wallet/types';
+import { useLazyQuery } from '@apollo/client';
 import { WalletContext } from './wallet.context';
 import {
   initialWalletState,
@@ -7,8 +8,13 @@ import {
   walletReducer,
 } from './wallet.reducer';
 import { WalletErros } from './constants';
+import { WalletQueries } from './wallet.service';
 
 export const WalletProdovider: React.FC = ({ children }) => {
+  const [getViewer, { loading, error, data, called, refetch }] = useLazyQuery(
+    WalletQueries.viewer,
+  );
+
   const [props, dispatch] = React.useReducer(walletReducer, initialWalletState);
 
   const onPressBuy = (offer: Offer, checkout: Checkout) => {
@@ -37,9 +43,41 @@ export const WalletProdovider: React.FC = ({ children }) => {
   const toggleSeenBalance = () => {
     dispatch({ type: WalletActions.CHANGE_SEEN_BALANCE });
   };
+
+  const fetchWallet = async () => {
+    refetch?.();
+  };
+
+  const updateViewer = (customer: Customer) => {
+    dispatch({
+      type: WalletActions.SET_VIEWER,
+      payload: {
+        customer,
+      },
+    });
+  };
+
+  React.useEffect(() => {
+    if (data) updateViewer(data?.viewer);
+  }, [data]);
+
+  React.useEffect(() => {
+    getViewer();
+  }, [getViewer]);
+
   return (
     <WalletContext.Provider
-      value={{ ...props, dispatch, onPressBuy, toggleSeenBalance }}>
+      value={{
+        ...props,
+        loading,
+        called,
+        error,
+        fetchWallet,
+        updateViewer,
+        dispatch,
+        onPressBuy,
+        toggleSeenBalance,
+      }}>
       {children}
     </WalletContext.Provider>
   );

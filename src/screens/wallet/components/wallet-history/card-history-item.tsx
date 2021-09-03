@@ -22,7 +22,8 @@ const CardHistoryItem: React.FC<Props> = ({ item, onPress }) => {
       <View style={styles.viewDetails}>
         <Text style={styles.title}>Compra na loja</Text>
         <Text style={styles.subtitle}>
-          {item?.quantity}x {item?.offer?.product?.name}
+          {item?.quantity > 1 ? `${item?.quantity}x ` : ''}
+          {item?.offer?.product?.name}
         </Text>
         <TextPrice style={styles.subtitle} price={item?.total || 0} />
       </View>

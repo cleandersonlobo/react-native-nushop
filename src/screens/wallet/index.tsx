@@ -8,14 +8,14 @@ import BalanceHeader from './components/balance';
 import WalletHistory from './components/wallet-history';
 
 const WalletScreen = () => {
-  const { user, history } = useWallet();
+  const { user, history, loading } = useWallet();
 
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
       <AccordionBackground accordion />
       <ScrollView contentContainerStyle={styles.scrollView}>
         <BalanceHeader balance={user?.balance || 0} name={user?.name} />
-        <WalletHistory history={history} />
+        <WalletHistory history={history} loading={loading} />
       </ScrollView>
     </SafeAreaView>
   );

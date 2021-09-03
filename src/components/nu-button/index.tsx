@@ -6,6 +6,7 @@ import {
   TouchableOpacityProps,
   TextProps,
   View,
+  ActivityIndicator,
 } from 'react-native';
 import { AppColors } from 'core/colors';
 
@@ -15,6 +16,7 @@ interface Props {
   textStyles?: TextProps['style'];
   rightComponent?: React.ReactNode | React.ReactNode[];
   fullWidth?: boolean;
+  loading?: boolean;
 }
 
 type ButtonProps = TouchableOpacityProps & Props;
@@ -26,6 +28,7 @@ const NuButton: React.FC<ButtonProps> = ({
   textStyles,
   fullWidth,
   rightComponent,
+  loading,
   ...restProps
 }) => {
   const buttonStyles = useMemo(() => {
@@ -43,10 +46,33 @@ const NuButton: React.FC<ButtonProps> = ({
       default:
         return {
           button: styles.primary,
-          text: {},
+          text: {
+            color: AppColors.white,
+          },
         };
     }
   }, [variant]);
+
+  const renderText = () => {
+    return (
+      <>
+        <View style={styles.rightCol}>{rightComponent}</View>
+        <Text style={[styles.buttonText, buttonStyles.text, textStyles]}>
+          {text}
+        </Text>
+      </>
+    );
+  };
+
+  const renderLoading = useMemo(() => {
+    return (
+      <ActivityIndicator
+        size={30}
+        color={buttonStyles.text?.color || AppColors.primary}
+      />
+    );
+  }, [buttonStyles.text.color]);
+
   return (
     <TouchableOpacity
       style={[
@@ -56,10 +82,7 @@ const NuButton: React.FC<ButtonProps> = ({
         fullWidth && styles.fullWidth,
       ]}
       {...restProps}>
-      <View style={styles.rightCol}>{rightComponent}</View>
-      <Text style={[styles.buttonText, buttonStyles.text, textStyles]}>
-        {text}
-      </Text>
+      {loading ? renderLoading : renderText()}
     </TouchableOpacity>
   );
 };
