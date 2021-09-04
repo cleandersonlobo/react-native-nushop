@@ -2,14 +2,21 @@
   "expo": {
     "name": "nushop",
     "slug": "nushop",
+    "privacy": "unlisted",
     "version": "1.0.0",
     "orientation": "portrait",
+    "icon": "./assets/nushop_icon.png",
     "assetBundlePatterns": [
       "**/*"
     ],
     "ios": {
       "supportsTablet": false,
-      "icon": "./images/nushop_icon.png"
+      "icon": "./assets/nushop_icon.png"
+    },
+    "splash": {
+      "backgroundColor": "#33106A",
+      "image": "./assets/nu_splash.png",
+      "resizeMode": "contain"
     }
   },
   "name": "nushop",

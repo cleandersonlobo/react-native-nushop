@@ -1,7 +1,7 @@
 # nushop
 <p align="center">
   <a href="#">
-    <img src="./images/nushop_icon.png" alt="Logo" width=120 height=120>
+    <img src="./assets/nushop_icon.png" alt="Logo" width=120 height=120>
   </a>
 </p>
   <h2 align="center">
@@ -81,42 +81,42 @@ When you run expo start (or npm start), Expo CLI starts Metro Bundler, which is 
 ### **Wallet**
 
 <span style="border: 1px solid #F4F4F4; ">
-  <img src="./images/screenshots/wallet.png" alt="Logo" height=800 >  
+  <img src="./screenshots/wallet.png" alt="Logo" height=800 >  
 </span>
 <br />
 
 ### **Offers**
 
 <span style="border: 1px solid #F4F4F4; ">
-  <img src="./images/screenshots/offers.png" alt="Logo" height=800>  
+  <img src="./screenshots/offers.png" alt="Logo" height=800>  
 </span>
 <br />
 
 ### **Buy Offer**
 
 <span style="border: 1px solid #F4F4F4; ">
-  <img src="./images/screenshots/buy-offer.png" alt="Logo" height=800>  
+  <img src="./screenshots/buy-offer.png" alt="Logo" height=800>  
 </span>
 <br />
 
 ### **Transaction history**
 
 <span style="border: 1px solid #F4F4F4; ">
-  <img src="./images/screenshots/wallet-history.png" alt="Logo" height=800>  
+  <img src="./screenshots/wallet-history.png" alt="Logo" height=800>  
 </span>
 <br />
 
 ### **Transaction details**
 
 <span style="border: 1px solid #F4F4F4; ">
-  <img src="./images/screenshots/history-details.png" alt="Logo" height=800>  
+  <img src="./screenshots/history-details.png" alt="Logo" height=800>  
 </span>
 <br />
 
 ### **Hide balance**
 
 <span style="border: 1px solid #F4F4F4; ">
-  <img src="./images/screenshots/wallet-hide-balance.png" alt="Logo" height=800>  
+  <img src="./screenshots/wallet-hide-balance.png" alt="Logo" height=800>  
 </span>
 <br />
 
