@@ -1,14 +1,13 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-
 import ProductScreen from 'screens/product-details';
 import { ProductDetailsRoutes } from 'screens/product-details/routes';
 import { HistoryDetailsRoute } from 'screens/history-details/routes';
 import BalanceNavHeader from 'screens/product-details/components/balance-view';
+import HistoryDetailsScreen from 'screens/history-details';
 import MainNavigation from './main-tabs-navigation';
 import { RootRoutes } from './routes';
 import { defaultScreenOtions, transitionSpec } from './shared/screen-options';
-import HistoryDetailsScreen from '../screens/history-details/index';
 
 const MainStack = createStackNavigator();
 

@@ -1,6 +1,7 @@
-import { Checkout, Offer, useWallet } from 'domain/wallet';
 import { WalletErros } from '../constants';
+import { useWallet } from '../wallet.context';
 import { WalletActions } from '../wallet.reducer';
+import { Checkout, Offer } from '../types';
 
 export const useBalanceWallet = () => {
   const { costumer, dispatch } = useWallet();

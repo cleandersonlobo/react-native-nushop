@@ -3,9 +3,15 @@
     "name": "nushop",
     "slug": "nushop",
     "version": "1.0.0",
+    "orientation": "portrait",
     "assetBundlePatterns": [
       "**/*"
-    ]
+    ],
+    "ios": {
+      "supportsTablet": false,
+      "icon": "./images/nushop_icon.png"
+    }
   },
-  "name": "nushop"
+  "name": "nushop",
+  "displayName": "NUShop"
 }
