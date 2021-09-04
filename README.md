@@ -80,42 +80,44 @@ When you run expo start (or npm start), Expo CLI starts Metro Bundler, which is 
 ## Screenshots
 ### **Wallet**
 
-<p style="border: 1px solid #F4F4F4;  display:inline-block">
+<span style="border: 1px solid #F4F4F4; ">
   <img src="./images/screenshots/wallet.png" alt="Logo" height=800 >  
-</p>
+</span>
 <br />
+
 ### **Offers**
 
-<p style="border: 1px solid #F4F4F4;  display:inline-block">
+<span style="border: 1px solid #F4F4F4; ">
   <img src="./images/screenshots/offers.png" alt="Logo" height=800>  
-</p>
+</span>
 <br />
+
 ### **Buy Offer**
 
-<p style="border: 1px solid #F4F4F4;  display:inline-block">
+<span style="border: 1px solid #F4F4F4; ">
   <img src="./images/screenshots/buy-offer.png" alt="Logo" height=800>  
-</p>
+</span>
 <br />
 
 ### **Transaction history**
 
-<p style="border: 1px solid #F4F4F4;  display:inline-block">
+<span style="border: 1px solid #F4F4F4; ">
   <img src="./images/screenshots/wallet-history.png" alt="Logo" height=800>  
-</p>
+</span>
 <br />
 
 ### **Transaction details**
 
-<p style="border: 1px solid #F4F4F4;  display:inline-block">
+<span style="border: 1px solid #F4F4F4; ">
   <img src="./images/screenshots/history-details.png" alt="Logo" height=800>  
-</p>
+</span>
 <br />
 
 ### **Hide balance**
 
-<p style="border: 1px solid #F4F4F4;  display:inline-block">
+<span style="border: 1px solid #F4F4F4; ">
   <img src="./images/screenshots/wallet-hide-balance.png" alt="Logo" height=800>  
-</p>
+</span>
 <br />
 
 ## Show Support
