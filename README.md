@@ -78,43 +78,45 @@ When you run expo start (or npm start), Expo CLI starts Metro Bundler, which is 
 > The installation step-by-step information is taken from the [official documentation](https://docs.expo.dev/get-started/create-a-new-app/#opening-the-app-on-your-phonetablet).
 
 ## Screenshots
-
+<style>
+.shadow {box-shadow:3px 3px 6px -3px rgba(0,0,0,0.37); display:inline-block}
+</style>
 ### **Wallet**
 
-<p style="box-shadow:3px 3px 6px -3px rgba(0,0,0,0.37); display:inline-block">
+<p class="shadow">
   <img src="./images/screenshots/wallet.png" alt="Logo" height=800 >  
 </p>
 <br />
 ### **Offers**
 
-<p style="box-shadow:3px 3px 6px -3px rgba(0,0,0,0.37); display:inline-block">
+<p class="shadow">
   <img src="./images/screenshots/offers.png" alt="Logo" height=800>  
 </p>
 <br />
 ### **Buy Offer**
 
-<p style="box-shadow:3px 3px 6px -3px rgba(0,0,0,0.37); display:inline-block">
+<p class="shadow">
   <img src="./images/screenshots/buy-offer.png" alt="Logo" height=800>  
 </p>
 <br />
 
 ### **Transaction history**
 
-<p style="box-shadow:3px 3px 6px -3px rgba(0,0,0,0.37); display:inline-block">
+<p class="shadow">
   <img src="./images/screenshots/wallet-history.png" alt="Logo" height=800>  
 </p>
 <br />
 
 ### **Transaction details**
 
-<p style="box-shadow:3px 3px 6px -3px rgba(0,0,0,0.37); display:inline-block">
+<p class="shadow">
   <img src="./images/screenshots/history-details.png" alt="Logo" height=800>  
 </p>
 <br />
 
 ### **Hide balance**
 
-<p style="box-shadow:3px 3px 6px -3px rgba(0,0,0,0.37); display:inline-block">
+<p class="shadow">
   <img src="./images/screenshots/wallet-hide-balance.png" alt="Logo" height=800>  
 </p>
 <br />
