@@ -1,13 +1,22 @@
 import React, { useCallback, useEffect } from 'react';
 import { useRouteParams } from 'navigation/hooks/useRouteParams';
-import { StyleSheet, Text, ScrollView, View, Image } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  ScrollView,
+  View,
+  Image,
+  Dimensions,
+} from 'react-native';
 import { AppColors } from 'core/colors';
 import { NuButton, Separator, TextPrice } from 'components';
 import { MaterialIcons } from '@expo/vector-icons';
 import { Offer, Checkout, useBalanceWallet } from 'domain/wallet';
 import { usePurchase } from 'domain/checkout/checkout.service';
+import Animated from 'react-native-reanimated';
 import TransactionModal from './components/transaction-modal';
 import { ProductDetailsIDs } from './types';
+import { useOverlayBackground } from './hooks/use-overlay-background';
 
 const ProductScreen = () => {
   const { onCheckout } = useBalanceWallet();
@@ -20,6 +29,8 @@ const ProductScreen = () => {
     visible: false,
     status: '',
   });
+
+  const overlayStyles = useOverlayBackground(state.visible);
 
   const [checkout] = React.useState<Checkout>({
     total: offer?.price || 0,
@@ -53,54 +64,65 @@ const ProductScreen = () => {
   }, [data]);
 
   return (
-    <View style={styles.container} testID={ProductDetailsIDs.Container}>
-      <TransactionModal
-        visible={state.visible}
-        onClose={closeModal}
-        status={state.status}
-        text={data?.purchase.errorMessage}
-      />
-      <ScrollView contentContainerStyle={styles.scroll}>
-        <View style={styles.viewImage}>
-          <Image
-            source={{ uri: offer?.product?.image }}
-            resizeMode="contain"
-            style={styles.image}
-          />
-        </View>
-        <View style={styles.body}>
-          <View>
-            <Text style={styles.title}>{offer?.product.name}</Text>
-            <TextPrice style={styles.price} price={offer?.price} />
-            <Separator />
-            <Text style={styles.description}>{offer?.product.description}</Text>
-          </View>
-          <View style={styles.viewButton}>
-            <NuButton
-              testID={ProductDetailsIDs.BtnBuyNow}
-              variant="secondary"
-              style={styles.button}
-              text="Comprar agora"
-              onPress={onPressBuyNow}
-              loading={loading}
-              rightComponent={
-                <MaterialIcons
-                  name="attach-money"
-                  size={24}
-                  color={AppColors.white}
-                />
-              }
+    <>
+      <Animated.View style={[styles.overlay, overlayStyles]} />
+      <View style={styles.container} testID={ProductDetailsIDs.Container}>
+        <TransactionModal
+          visible={state.visible}
+          onClose={closeModal}
+          status={state.status}
+          text={data?.purchase.errorMessage}
+        />
+        <ScrollView contentContainerStyle={styles.scroll}>
+          <View style={styles.viewImage}>
+            <Image
+              source={{ uri: offer?.product?.image }}
+              resizeMode="contain"
+              style={styles.image}
             />
           </View>
-        </View>
-      </ScrollView>
-    </View>
+          <View style={styles.body}>
+            <View>
+              <Text style={styles.title}>{offer?.product.name}</Text>
+              <TextPrice style={styles.price} price={offer?.price} />
+              <Separator />
+              <Text style={styles.description}>
+                {offer?.product.description}
+              </Text>
+            </View>
+            <View style={styles.viewButton}>
+              <NuButton
+                testID={ProductDetailsIDs.BtnBuyNow}
+                variant="secondary"
+                style={styles.button}
+                text="Comprar agora"
+                onPress={onPressBuyNow}
+                loading={loading}
+                rightComponent={
+                  <MaterialIcons
+                    name="attach-money"
+                    size={24}
+                    color={AppColors.white}
+                  />
+                }
+              />
+            </View>
+          </View>
+        </ScrollView>
+      </View>
+    </>
   );
 };
 
 export default ProductScreen;
 
 const styles = StyleSheet.create({
+  overlay: {
+    flex: 1,
+    position: 'absolute',
+    height: Dimensions.get('window').height,
+    width: '100%',
+  },
   container: {
     flex: 1,
     backgroundColor: AppColors.white,

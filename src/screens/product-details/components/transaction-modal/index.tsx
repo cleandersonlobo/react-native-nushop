@@ -6,13 +6,6 @@ import {
   View,
   TouchableWithoutFeedback,
 } from 'react-native';
-import Animated, {
-  Easing,
-  useAnimatedStyle,
-  useSharedValue,
-  withTiming,
-  interpolateColor,
-} from 'react-native-reanimated';
 import { AppColors } from 'core/colors';
 import { Ionicons } from '@expo/vector-icons';
 import { NuButton, Separator } from 'components';
@@ -24,23 +17,13 @@ import { ptBRErrors } from 'domain/checkout/utils/locale-errors';
 import { ProductDetailsIDs } from 'screens/product-details/types';
 import { TransactionMessages } from 'domain/checkout/checkout.interface';
 
-const colors = ['rgba(0, 0, 0, 0.0)', 'rgba(0, 0, 0, 0.09)'];
-
 const TransactionModal: React.FC<{
   text?: string | null;
   visible?: boolean;
   status?: string;
   onClose: () => void;
 }> = ({ visible, status, onClose, text }) => {
-  const color = useSharedValue(0);
   const navigation = useNavigation();
-  // animation background
-  React.useEffect(() => {
-    color.value = withTiming(visible ? 1 : 0, {
-      duration: visible ? 600 : 100,
-      easing: Easing.linear,
-    });
-  }, [color.value, visible]);
 
   const navigateToWallet = () => {
     onClose?.();
@@ -58,22 +41,17 @@ const TransactionModal: React.FC<{
     return TransactionMessages.InsufficientFunds;
   }, [status, text]);
 
-  const defaultSpringStyles = useAnimatedStyle(() => {
-    return {
-      backgroundColor: interpolateColor(color.value, [0, 1], colors),
-    };
-  });
-
   return (
     <Modal
       animationType="slide"
       transparent
       visible={visible}
+      onRequestClose={onClose}
       onDismiss={onClose}>
-      <TouchableWithoutFeedback
-        onPress={onClose}
-        testID={ProductDetailsIDs.TransactionModal}>
-        <Animated.View style={[styles.modal, defaultSpringStyles]}>
+      <View style={styles.modal}>
+        <TouchableWithoutFeedback
+          onPress={onClose}
+          testID={ProductDetailsIDs.TransactionModal}>
           <View style={styles.content}>
             <View style={styles.contentText}>
               <Ionicons
@@ -108,8 +86,8 @@ const TransactionModal: React.FC<{
               />
             )}
           </View>
-        </Animated.View>
-      </TouchableWithoutFeedback>
+        </TouchableWithoutFeedback>
+      </View>
     </Modal>
   );
 };
@@ -145,6 +123,7 @@ const styles = StyleSheet.create({
     padding: 20,
     minHeight: 220,
     minWidth: 280,
+    maxWidth: 500,
     borderRadius: 20,
     shadowColor: AppColors.shadowColor,
     shadowOffset: {
