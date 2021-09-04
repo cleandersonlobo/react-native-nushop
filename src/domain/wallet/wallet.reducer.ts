@@ -4,7 +4,7 @@ import { Checkout, TCustomer } from 'domain/wallet/types';
 import { Wallet, Offer } from './types';
 
 export enum WalletActions {
-  SET_VIEWER = 'WalletActions::SET_VIEWER',
+  SET_COSTUMER = 'WalletActions::SET_COSTUMER',
   CHANGE_SEEN_BALANCE = 'WalletActions::CHANGE_SEEN_BALANCE',
   BUY_OFFER_NOW = 'WalletActions::BUY_OFFER_NOW',
 }
@@ -19,7 +19,7 @@ export type IWalletActionsType =
       };
     }
   | {
-      type: WalletActions.SET_VIEWER;
+      type: WalletActions.SET_COSTUMER;
       payload: {
         customer: TCustomer;
       };
@@ -56,7 +56,7 @@ export const walletReducer: Reducer<WalletState, IWalletActionsType> = (
   action: IWalletActionsType,
 ) => {
   switch (action.type) {
-    case WalletActions.SET_VIEWER:
+    case WalletActions.SET_COSTUMER:
       const { offers, ...costumer } = action.payload.customer;
       return {
         ...state,

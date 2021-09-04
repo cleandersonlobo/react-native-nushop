@@ -44,7 +44,7 @@ describe('ProductScreen', () => {
     expect(await findByText(MockOffer.product.name)).toBeTruthy();
   });
 
-  describe('ProductScreen -> Purchase', () => {
+  describe('Purchase', () => {
     it.each([
       ['success', TransactionMessages.PurchaseSuccessfully],
       ['insufficientFunds', TransactionMessages.InsufficientFunds],

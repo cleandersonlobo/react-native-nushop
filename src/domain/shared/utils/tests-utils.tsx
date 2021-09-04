@@ -18,10 +18,10 @@ export const renderHookApollo = <T extends () => any>(
   });
 };
 
-export const customRender = (ui: any, { mocks }: any) =>
+export const customRender = (ui: any, { mocks, cache }: any) =>
   render(ui, {
     wrapper: ({ children }) => (
-      <MockedProvider mocks={mocks} addTypename={false}>
+      <MockedProvider mocks={mocks} addTypename={false} cache={cache}>
         <WalletProvider>{children}</WalletProvider>
       </MockedProvider>
     ),
@@ -29,7 +29,8 @@ export const customRender = (ui: any, { mocks }: any) =>
 
 export const renderHookWithApollo = <T extends () => any>(
   hookMethod: T,
-  mocks: any,
+  mocks: any = [],
+  config = {},
 ) => {
   const hook: { current: ReturnType<T> } = {
     current: {} as ReturnType<T>,
@@ -40,7 +41,7 @@ export const renderHookWithApollo = <T extends () => any>(
     return null;
   };
 
-  const instance = customRender(<Component />, { mocks });
+  const instance = customRender(<Component />, { mocks, ...config });
 
   return {
     ...instance,

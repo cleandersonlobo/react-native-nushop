@@ -27,7 +27,7 @@ export const WalletProvider: React.FC = ({ children }) => {
 
   const updateCostumer = (customer: TCustomer) => {
     dispatch({
-      type: WalletActions.SET_VIEWER,
+      type: WalletActions.SET_COSTUMER,
       payload: {
         customer,
       },
