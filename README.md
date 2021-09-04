@@ -24,6 +24,8 @@ The NuShop is a solution for a customer to use their balance to make quick purch
 > Routing and navigation for Expo and React Native apps.
 * [Apollo Client](https://www.apollographql.com/docs/react/integrations/react-native/)
 * TypeScript
+* Jest
+* [Testing library](https://testing-library.com/) for React Native
 
 
 To run the project you need to follow the installation process below if you don't have the React Native environment.
@@ -74,3 +76,6 @@ When you run expo start (or npm start), Expo CLI starts Metro Bundler, which is 
 - [iOS](https://apps.apple.com/br/app/expo-go/id982107779)
 
 > The installation step-by-step information is taken from the [official documentation](https://docs.expo.dev/get-started/create-a-new-app/#opening-the-app-on-your-phonetablet).
+
+
+Enjoy this solution that was made with great care.
