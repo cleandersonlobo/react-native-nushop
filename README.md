@@ -20,6 +20,12 @@ The NuShop is a solution for a customer to use their balance to make quick purch
 </p>
 </p>
 
+<p align="center">
+  <small>
+    <a href="#demo-video">Demo - Video</a>
+  </small>
+</p>
+
 
 --------
 
@@ -129,7 +135,13 @@ When you run expo start (or npm start), Expo CLI starts Metro Bundler, which is 
   <img src="./screenshots/wallet-hide-balance.png" alt="Logo" height=800>  
 </span>
 <br />
+<br />
 
+### **Demo video**
+
+[![NuShop - Demo video](https://img.youtube.com/vi/qcfEx2Uc_ck/0.jpg)](http://www.youtube.com/watch?v=qcfEx2Uc_ck)
+
+---
 ## Show Support
 * [Recommend Me On LinkedIn](https://www.linkedin.com/in/cleandersonlobo/) - I will realy Appriciate this
 * Don't forget to star ⭐ the repo 😉, it's FREE.
