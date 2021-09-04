@@ -10,6 +10,16 @@
   <p align="center">
 The NuShop is a solution for a customer to use their balance to make quick purchases of special offers. Transaction is faster than PIX and traditional debit card. Application also shows purchase history.
   </p>
+<p align="center">
+  <a href="https://exp.host/@cleandersonlobo/nushop
+"> Expo project
+<p align="center">
+  <small>
+    <a href="#download-expo-app">Don't have the expo app?</a>
+  </small>
+</p>
+</p>
+
 
 --------
 
