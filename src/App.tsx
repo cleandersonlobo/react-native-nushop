@@ -6,6 +6,7 @@ import FlashMessage from 'react-native-flash-message';
 import AppNavigation from 'navigation/app-navigation';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { WalletProvider } from 'domain/wallet/wallet.provider';
+import { StatusBar } from 'react-native';
 
 export const App = () => {
   return (
@@ -13,6 +14,12 @@ export const App = () => {
       <SafeAreaProvider>
         <NavigationContainer>
           <WalletProvider>
+            <StatusBar
+              translucent
+              barStyle="dark-content"
+              backgroundColor="rgba(0,0,0,0.2)"
+              animated
+            />
             <AppNavigation />
           </WalletProvider>
         </NavigationContainer>

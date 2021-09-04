@@ -1,3 +1,6 @@
+import 'intl';
+import 'intl/locale-data/jsonp/pt-BR';
+
 export interface IFormatPricePayload {
   price: number;
   currency?: string;

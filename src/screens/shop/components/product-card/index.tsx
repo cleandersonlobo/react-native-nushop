@@ -71,6 +71,7 @@ const styles = StyleSheet.create({
     marginRight: 3,
   },
   card: {
+    elevation: 1,
     borderRadius: 10,
     margin: 10,
     flexDirection: 'row',
