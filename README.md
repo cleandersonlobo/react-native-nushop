@@ -77,5 +77,55 @@ When you run expo start (or npm start), Expo CLI starts Metro Bundler, which is 
 
 > The installation step-by-step information is taken from the [official documentation](https://docs.expo.dev/get-started/create-a-new-app/#opening-the-app-on-your-phonetablet).
 
+## Screenshots
 
-Enjoy this solution that was made with great care.
+### **Wallet**
+
+<p>
+  <img src="./images/screenshots/wallet.png" alt="Logo" height=800>  
+</p>
+<br />
+### **Offers**
+
+<p>
+  <img src="./images/screenshots/offers.png" alt="Logo" height=800>  
+</p>
+<br />
+### **Buy Offer**
+
+<p>
+  <img src="./images/screenshots/buy-offer.png" alt="Logo" height=800>  
+</p>
+<br />
+
+### **Transaction history**
+
+<p>
+  <img src="./images/screenshots/wallet-history.png" alt="Logo" height=800>  
+</p>
+<br />
+
+### **Transaction details**
+
+<p>
+  <img src="./images/screenshots/history-details.png" alt="Logo" height=800>  
+</p>
+<br />
+
+### **Hide balance**
+
+<p>
+  <img src="./images/screenshots/wallet-hide-balance.png" alt="Logo" height=800>  
+</p>
+<br />
+
+## Show Support
+* [Recommend Me On LinkedIn](https://www.linkedin.com/in/cleandersonlobo/) - I will realy Appriciate this
+* Don't forget to star ⭐ the repo 😉, it's FREE.
+
+## Author
+
+[Cleanderson Lobo](https://www.linkedin.com/in/cleandersonlobo/)
+
+
+> *Enjoy this solution that was made with great care.*
