@@ -81,40 +81,40 @@ When you run expo start (or npm start), Expo CLI starts Metro Bundler, which is 
 
 ### **Wallet**
 
-<p>
-  <img src="./images/screenshots/wallet.png" alt="Logo" height=800>  
+<p style="box-shadow:3px 3px 6px -3px rgba(0,0,0,0.37); display:inline-block">
+  <img src="./images/screenshots/wallet.png" alt="Logo" height=800 >  
 </p>
 <br />
 ### **Offers**
 
-<p>
+<p style="box-shadow:3px 3px 6px -3px rgba(0,0,0,0.37); display:inline-block">
   <img src="./images/screenshots/offers.png" alt="Logo" height=800>  
 </p>
 <br />
 ### **Buy Offer**
 
-<p>
+<p style="box-shadow:3px 3px 6px -3px rgba(0,0,0,0.37); display:inline-block">
   <img src="./images/screenshots/buy-offer.png" alt="Logo" height=800>  
 </p>
 <br />
 
 ### **Transaction history**
 
-<p>
+<p style="box-shadow:3px 3px 6px -3px rgba(0,0,0,0.37); display:inline-block">
   <img src="./images/screenshots/wallet-history.png" alt="Logo" height=800>  
 </p>
 <br />
 
 ### **Transaction details**
 
-<p>
+<p style="box-shadow:3px 3px 6px -3px rgba(0,0,0,0.37); display:inline-block">
   <img src="./images/screenshots/history-details.png" alt="Logo" height=800>  
 </p>
 <br />
 
 ### **Hide balance**
 
-<p>
+<p style="box-shadow:3px 3px 6px -3px rgba(0,0,0,0.37); display:inline-block">
   <img src="./images/screenshots/wallet-hide-balance.png" alt="Logo" height=800>  
 </p>
 <br />
