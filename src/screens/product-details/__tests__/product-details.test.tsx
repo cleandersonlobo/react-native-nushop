@@ -89,6 +89,7 @@ describe('ProductScreen', () => {
         // costumer request
         await new Promise(resolve => setTimeout(resolve, 0)); // wait for response
 
+        // button to open modal
         expect(getByTestId(ProductDetailsIDs.BtnBuyNow)).toBeTruthy();
 
         await act(async () => {
@@ -96,6 +97,13 @@ describe('ProductScreen', () => {
         });
 
         expect(getByTestId(ProductDetailsIDs.TransactionModal)).toBeTruthy();
+
+        // button to confirm transaction/buy
+        expect(getByTestId(ProductDetailsIDs.ConfirmTransaction)).toBeTruthy();
+
+        await act(async () => {
+          fireEvent.press(getByTestId(ProductDetailsIDs.ConfirmTransaction));
+        });
 
         expect(await findByText(message)).toBeTruthy();
       },
