@@ -11,7 +11,7 @@ import {
 import { AppColors } from 'core/colors';
 
 interface Props {
-  variant?: 'primary' | 'secondary' | 'outline';
+  variant?: 'primary' | 'secondary' | 'outline' | 'purple' | 'text';
   text?: string;
   textStyles?: TextProps['style'];
   rightComponent?: React.ReactNode | React.ReactNode[];
@@ -38,10 +38,22 @@ const NuButton: React.FC<ButtonProps> = ({
           button: styles.outline,
           text: styles.textOutline,
         };
+      case 'text':
+        return {
+          button: styles.outlineText,
+          text: styles.textOutline,
+        };
       case 'secondary':
         return {
           button: styles.secondary,
           text: styles.textSecondary,
+        };
+      case 'purple':
+        return {
+          button: styles.primaryPurple,
+          text: {
+            color: AppColors.white,
+          },
         };
       default:
         return {
@@ -107,6 +119,9 @@ const styles = StyleSheet.create({
   primary: {
     backgroundColor: AppColors.orange,
   },
+  primaryPurple: {
+    backgroundColor: AppColors.primary,
+  },
   secondary: {
     backgroundColor: AppColors.secondary,
   },
@@ -114,6 +129,10 @@ const styles = StyleSheet.create({
     backgroundColor: AppColors.white,
     borderWidth: 1,
     borderColor: AppColors.primary,
+  },
+  outlineText: {
+    backgroundColor: AppColors.white,
+    borderWidth: 0,
   },
   rightCol: {
     left: 32,
