@@ -11,7 +11,7 @@ import {
 import { AppColors } from 'core/colors';
 import { NuButton, Separator, TextPrice } from 'components';
 import { MaterialIcons } from '@expo/vector-icons';
-import { Offer, Checkout, useBalanceWallet } from 'domain/wallet';
+import { Offer, Checkout, useBalanceWallet, WalletErros } from 'domain/wallet';
 import { usePurchase } from 'domain/checkout/checkout.service';
 import Animated from 'react-native-reanimated';
 import TransactionModal from './components/transaction-modal';
@@ -41,12 +41,21 @@ const ProductScreen = () => {
     setState(vals => ({ status: status || vals?.status, visible: true }));
   }, []);
 
-  const closeModal = useCallback((status?: string) => {
-    setState(vals => ({
-      visible: false,
-      status: typeof status === 'string' ? status || vals.status : vals.status,
-    }));
+  const onPressConfirmBuy = useCallback(() => {
+    setState({ status: '', visible: true });
   }, []);
+
+  const closeModal = useCallback(
+    (status?: string) => {
+      if (loading) return;
+      setState(vals => ({
+        visible: false,
+        status:
+          typeof status === 'string' ? status || vals.status : vals.status,
+      }));
+    },
+    [loading],
+  );
 
   const onPressBuyNow = () => {
     purchase(offer);
@@ -58,7 +67,7 @@ const ProductScreen = () => {
         const response = onCheckout(offer, checkout);
         if (response) openModal(response.status);
       } else {
-        openModal('');
+        openModal(WalletErros.WithoutBalance);
       }
     }
   }, [data]);
@@ -68,8 +77,10 @@ const ProductScreen = () => {
       <Animated.View style={[styles.overlay, overlayStyles]} />
       <View style={styles.container} testID={ProductDetailsIDs.Container}>
         <TransactionModal
+          loading={loading}
           visible={state.visible}
           onClose={closeModal}
+          onConfirmTransaction={onPressBuyNow}
           status={state.status}
           text={data?.purchase.errorMessage}
         />
@@ -96,8 +107,7 @@ const ProductScreen = () => {
                 variant="secondary"
                 style={styles.button}
                 text="Comprar agora"
-                onPress={onPressBuyNow}
-                loading={loading}
+                onPress={onPressConfirmBuy}
                 rightComponent={
                   <MaterialIcons
                     name="attach-money"

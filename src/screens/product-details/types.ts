@@ -5,4 +5,5 @@ export enum ProductDetailsIDs {
   BtnBuyNow = 'ProductDetailsIDs::BtnBuyNow',
   ButtonSeenHistory = 'ProductDetailsIDs::ButtonSeenHistory',
   HistorySeen = 'ProductDetailsIDs::BtnBuyNow',
+  ConfirmTransaction = 'ProductDetailsIDs::ConfirmTransaction',
 }

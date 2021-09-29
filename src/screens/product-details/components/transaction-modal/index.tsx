@@ -1,28 +1,28 @@
 import React from 'react';
 import {
   StyleSheet,
-  Text,
   Modal,
   View,
   TouchableWithoutFeedback,
 } from 'react-native';
 import { AppColors } from 'core/colors';
-import { Ionicons } from '@expo/vector-icons';
-import { NuButton, Separator } from 'components';
-import { SeparatorSizes } from 'components/separator';
 import { useNavigation } from '@react-navigation/native';
 import { WalletRoutes } from 'screens/wallet/routes';
 import { RootRoutes } from 'navigation/routes';
 import { ptBRErrors } from 'domain/checkout/utils/locale-errors';
 import { ProductDetailsIDs } from 'screens/product-details/types';
 import { TransactionMessages } from 'domain/checkout/checkout.interface';
+import { WalletErros } from 'domain/wallet';
+import ContentModalTranscation from './content-modal-transaction';
 
 const TransactionModal: React.FC<{
   text?: string | null;
   visible?: boolean;
+  loading: boolean;
   status?: string;
   onClose: () => void;
-}> = ({ visible, status, onClose, text }) => {
+  onConfirmTransaction: () => void;
+}> = ({ visible, status, onClose, text, onConfirmTransaction, loading }) => {
   const navigation = useNavigation();
 
   const navigateToWallet = () => {
@@ -36,9 +36,14 @@ const TransactionModal: React.FC<{
   };
 
   const textMsg = React.useMemo(() => {
-    if (ptBRErrors[text || '']) return ptBRErrors[text || ''];
-    if (status === 'success') return TransactionMessages.PurchaseSuccessfully;
-    return TransactionMessages.InsufficientFunds;
+    if (ptBRErrors[text || '']) return ptBRErrors[text as string];
+    if (status === WalletErros.Success) {
+      return TransactionMessages.PurchaseSuccessfully;
+    }
+    if (status === WalletErros.WithoutBalance) {
+      return TransactionMessages.InsufficientFunds;
+    }
+    return TransactionMessages.QuestionToConfirmTransaction;
   }, [status, text]);
 
   return (
@@ -53,38 +58,14 @@ const TransactionModal: React.FC<{
           onPress={onClose}
           testID={ProductDetailsIDs.TransactionModal}>
           <View style={styles.content}>
-            <View style={styles.contentText}>
-              <Ionicons
-                name={
-                  status === 'success' ? 'md-happy-outline' : 'md-sad-outline'
-                }
-                size={60}
-                color={
-                  status === 'success' ? AppColors.success : AppColors.secondary
-                }
-              />
-              <Separator />
-              <Text style={styles.text}>{textMsg}</Text>
-              <Separator />
-            </View>
-            <NuButton
-              testID={ProductDetailsIDs.CloseTransactionModal}
-              text="Fechar"
-              variant="outline"
-              accessibilityLabel="Close modal"
-              fullWidth
-              onPress={onClose}
+            <ContentModalTranscation
+              status={status}
+              loading={loading}
+              onClose={onClose}
+              message={textMsg}
+              onPressToBuy={onConfirmTransaction}
+              onPressSeenHistory={navigateToWallet}
             />
-            <Separator size={SeparatorSizes.M} />
-            {status === 'success' && (
-              <NuButton
-                testID={ProductDetailsIDs.ButtonSeenHistory}
-                text="Ver histórico"
-                fullWidth
-                onPress={navigateToWallet}
-                accessibilityLabel="See my history transactions"
-              />
-            )}
           </View>
         </TouchableWithoutFeedback>
       </View>

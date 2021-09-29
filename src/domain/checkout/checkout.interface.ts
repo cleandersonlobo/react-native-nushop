@@ -3,4 +3,5 @@ export enum TransactionMessages {
   InsufficientFunds = 'Saldo insuficiente.',
   YouDontHaveMuchMoney = 'Você não tem muito dinheiro.',
   OfferExpired = 'Oferta expirada.',
+  QuestionToConfirmTransaction = 'Você desejar realizar a compra?',
 }
