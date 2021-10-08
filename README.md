@@ -93,6 +93,15 @@ When you run expo start (or npm start), Expo CLI starts Metro Bundler, which is 
 
 > The installation step-by-step information is taken from the [official documentation](https://docs.expo.dev/get-started/create-a-new-app/#opening-the-app-on-your-phonetablet).
 
+
+## Changelog
+
+### 1.1.0
+
+- Added purchase confirmation modal. 
+### 1.0.0
+
+
 ## Screenshots
 ### **Wallet**
 
@@ -105,6 +114,14 @@ When you run expo start (or npm start), Expo CLI starts Metro Bundler, which is 
 
 <span style="border: 1px solid #F4F4F4; ">
   <img src="./screenshots/offers.png" alt="Logo" height=800>  
+</span>
+<br />
+
+
+### **Offer purchase confirmation**
+
+<span style="border: 1px solid #F4F4F4; ">
+  <img src="./screenshots/confirm-transaction.png" alt="Logo" height=800>  
 </span>
 <br />
 
